@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class SQLmanagement {
-    private static String sql = "jdbc:jtds:sqlserver://192.168.0.117:1433;databasename=QLCT;user=sinhvienFBU;password=ngoquanghy123"; // dia chi ket noi
+    private static String sql = "jdbc:jtds:sqlserver://192.168.0.219:1433;databasename=QLCT;user=sinhvienFBU;password=ngoquanghy123"; // dia chi ket noi
     public static Connection connectionSQLSever(){
         Connection connection = null;
         try {

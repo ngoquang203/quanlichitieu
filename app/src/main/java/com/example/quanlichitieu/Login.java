@@ -11,7 +11,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.quanlichitieu.fragment.MainFragment;
+import com.example.quanlichitieu.managementdata.CollectMoney;
 import com.example.quanlichitieu.managementdata.Logins;
+import com.example.quanlichitieu.managementdata.PlanMonney;
+import com.example.quanlichitieu.managementdata.SpentMoney;
 import com.example.quanlichitieu.managementdata.Users;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -63,8 +66,18 @@ public class Login extends AppCompatActivity {
                         }
                     }
                     if(count){
+                        int IDuser,IDcollect,IDspent,IDplan;
+                        IDuser = Users.getuserlist(email).getIDusers();
+                        IDcollect = CollectMoney.getuserlist(IDuser).getIDCollect();
+                        IDspent = SpentMoney.getuserlist(IDuser).getIDspent();
+                        IDplan = PlanMonney.getuserlist(IDuser).getIDplan();
+
                         sharedPreferences.edit().putBoolean("login",true).apply();
                         sharedPreferences.edit().putString("email",email).apply();
+                        sharedPreferences.edit().putInt("IDuser",IDuser).apply();
+                        sharedPreferences.edit().putInt("IDcollect",IDcollect).apply();
+                        sharedPreferences.edit().putInt("IDspent",IDspent).apply();
+                        sharedPreferences.edit().putInt("IDplan",IDplan).apply();
 
                         Intent intent = new Intent(Login.this,Home.class);
                         intent.putExtra("key_email",email);

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +15,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.quanlichitieu.apdaptermanagement.CategoryAdapter;
+import com.example.quanlichitieu.apdaptermanagement.CategoryAdapterIncome;
+import com.example.quanlichitieu.managementdata.ServiceCollect;
+import com.example.quanlichitieu.managementdata.ServiceSpent;
 import com.example.quanlichitieu.managementdata.Serviceapp;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -28,22 +32,35 @@ import java.util.List;
 public class Income extends AppCompatActivity {
 
 
-    private List<Serviceapp> serviceappList;
+    private List<ServiceCollect> serviceappList;
     private Spinner spinner;
-    private CategoryAdapter categoryAdapter;
+    private CategoryAdapterIncome categoryAdapter;
     private TextView dateTextInputEditText,timeTextInputEditText;
     private TextInputEditText income_money,income_description;
     private Button income_button;
-    private String Money,Description;
+    private String Money,Description,IDservice,dates,times;
+    private SharedPreferences sharedPreferences;
+    private int IDcollect;
+
     private void Init(){
         spinner = findViewById(R.id.income_spinner);
-        categoryAdapter = new CategoryAdapter(this,R.layout.item_selected,serviceappList);
+        categoryAdapter = new CategoryAdapterIncome(this,R.layout.item_selected,serviceappList);
         spinner.setAdapter(categoryAdapter);
+        List<Serviceapp> list;
+        try {
+            list = Serviceapp.getuserlist();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        IDservice = list.get(spinner.getSelectedItemPosition()).getNameservice();
+
         dateTextInputEditText = findViewById(R.id.income_date);
         timeTextInputEditText = findViewById(R.id.income_time);
         income_money = findViewById(R.id.income_money);
         income_description = findViewById(R.id.income_description);
         income_button = findViewById(R.id.income_button);
+        sharedPreferences = getSharedPreferences("loginData",MODE_PRIVATE);
+        IDcollect = sharedPreferences.getInt("IDcollect",0);
     }
 
     @Override
@@ -51,7 +68,7 @@ public class Income extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_income);
         try {
-            serviceappList = Serviceapp.getuserlist();
+            serviceappList = ServiceCollect.getuserlist();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -115,8 +132,16 @@ public class Income extends AppCompatActivity {
     private void clickSaveDateIncome(){
         Money = income_money.getText().toString();
         Description = income_description.getText().toString();
-        if(Money != "" && Description != ""){
+        IDservice = serviceappList.get(spinner.getSelectedItemPosition()).getIDservicecollect();
+        dates = dateTextInputEditText.getText().toString();
+        times = timeTextInputEditText.getText().toString();
+        income_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Money != "" && Description != ""){
 
-        }
+                }
+            }
+        });
     }
 }

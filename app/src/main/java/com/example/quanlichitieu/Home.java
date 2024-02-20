@@ -15,6 +15,7 @@ import android.view.MenuItem;
 
 import com.example.quanlichitieu.fragment.MainFragment;
 import com.example.quanlichitieu.fragment.ViewPageAdapter;
+import com.example.quanlichitieu.managementdata.CollectMoney;
 import com.example.quanlichitieu.managementdata.Users;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -25,19 +26,18 @@ public class Home extends AppCompatActivity {
     private ViewPager2 viewPager;
     private BottomNavigationView bottomNavigationView;
     private String email;
-    private Users users;
+    private int IDuser,IDcollect,IDplan,IDspent;
     private SharedPreferences sharedPreferences;
     private void init(){
         viewPager = findViewById(R.id.view_page);
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         sharedPreferences = getSharedPreferences("loginData",MODE_PRIVATE);
         email = sharedPreferences.getString("email","");
-        try {
-            users = Users.getuserlist(email);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        Log.e("IDuser : ", String.valueOf(users.getIDusers()));
+        IDuser = sharedPreferences.getInt("IDuser",0);
+
+        IDspent = sharedPreferences.getInt("IDspent",0);
+        IDplan = sharedPreferences.getInt("IDplan",0);
+
     }
 
     @Override

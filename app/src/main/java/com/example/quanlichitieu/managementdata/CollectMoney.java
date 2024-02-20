@@ -7,40 +7,61 @@ import com.example.quanlichitieu.sqlmanagement.SQLmanagement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 
 public class CollectMoney {
-    private Date Dates;
+
+   private int IDUsers,IDCollect;
     private float SumCollect;
 
-    public CollectMoney(Date dates, float sumCollect) {
-        Dates = dates;
+    public CollectMoney(){};
+    public CollectMoney(int IDUsers, int IDCollect, float sumCollect) {
+        this.IDUsers = IDUsers;
+        this.IDCollect = IDCollect;
         SumCollect = sumCollect;
     }
+    public static void addIdCollect(int IDUsers) throws SQLException{
+        Connection connection = SQLmanagement.connectionSQLSever();
+        Statement statement = connection.createStatement();// Tạo đối tượng Statement.
+        String sql = "insert into CollectMoney(IDuser) values(" + IDUsers + ")";
+        ResultSet rs = statement.executeQuery(sql);
+        connection.close();
+    }
+    public static CollectMoney getuserlist(int IDUsers) throws SQLException {
 
-    public void getDataCollectMoneySQL(){
-        try {
-            Connection connection = SQLmanagement.connectionSQLSever();
-            if(connection != null){
-                PreparedStatement ps = connection.prepareStatement("select * from Users");
-                ResultSet rs = ps.executeQuery();
-                if(rs.next()){
-                    Dates = rs.getDate(2);
-                    SumCollect = rs.getFloat(3);
-                    Log.i("DATA",Dates + "-" + SumCollect);
-                }
-                ps.close();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
+        Connection connection = SQLmanagement.connectionSQLSever();
+        Statement statement = connection.createStatement();// Tạo đối tượng Statement.
+        String sql = "select * from CollectMoney where IDuser = '" + IDUsers +"'";
+        // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
+        ResultSet rs = statement.executeQuery(sql);
+        CollectMoney collectMoney = new CollectMoney();
+        while(rs.next()){
+            collectMoney = new CollectMoney(
+                    rs.getInt("IDuser"),
+                    rs.getInt("IDcollect"),
+                    rs.getFloat("SumCollect"));
         }
-    }
-    public Date getDates() {
-        return Dates;
+        // Đọc dữ liệu từ ResultSet
+        connection.close();// Đóng kết nối
+        return collectMoney;
     }
 
-    public void setDates(Date dates) {
-        Dates = dates;
+    public int getIDUsers() {
+        return IDUsers;
+    }
+
+    public void setIDUsers(int IDUsers) {
+        this.IDUsers = IDUsers;
+    }
+
+    public int getIDCollect() {
+        return IDCollect;
+    }
+
+    public void setIDCollect(int IDCollect) {
+        this.IDCollect = IDCollect;
     }
 
     public float getSumCollect() {

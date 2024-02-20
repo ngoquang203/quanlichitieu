@@ -34,10 +34,16 @@ public class SignUps {
             // Tạo câu lệnh SQL để thêm đối tượng vào bảng
             String sqlInsert = "INSERT INTO Logins (ID, Passwords) VALUES ('" + Email + "','" + Password +"')";
             String sqlInsertUsers = "insert into Users(Names,ID) values ('" + Name+ "','" + Email + "')";
-
             // Thực thi câu lệnh SQL để thêm đối tượng
             statement.executeUpdate(sqlInsert);
             statement.executeUpdate(sqlInsertUsers);
+            int IDUsers = Users.getuserlist(Email).getIDusers();
+            String sqlInserIDcollect = "insert into CollectMoney(IDuser) values(" + IDUsers + ")";
+            String sqlInsertIDspent = "insert into SpentMoney(IDuser) values(" + IDUsers + ")";
+            String sqlInsertIDplan = "insert into PlanMonney(IDuser) values(" + IDUsers + ")";
+            statement.executeUpdate(sqlInserIDcollect);
+            statement.executeUpdate(sqlInsertIDspent);
+            statement.executeUpdate(sqlInsertIDplan);
         }
         // Đóng kết nối đến SQL Server
         connection.close();

@@ -1,29 +1,23 @@
 package com.example.quanlichitieu.apdaptermanagement;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.quanlichitieu.Income;
 import com.example.quanlichitieu.R;
 import com.example.quanlichitieu.managementdata.ServiceCollect;
-import com.example.quanlichitieu.managementdata.ServiceSpent;
-import com.example.quanlichitieu.managementdata.Serviceapp;
 
 import java.util.List;
 
-public class CategoryAdapter extends ArrayAdapter<ServiceSpent> {
-
-    public CategoryAdapter(@NonNull Context context, int resource, @NonNull List<ServiceSpent> objects) {
+public class CategoryAdapterIncome extends ArrayAdapter<ServiceCollect> {
+    public CategoryAdapterIncome(@NonNull Context context, int resource, @NonNull List<ServiceCollect> objects) {
         super(context, resource, objects);
     }
 
@@ -36,7 +30,7 @@ public class CategoryAdapter extends ArrayAdapter<ServiceSpent> {
 
         TextView title = convertView.findViewById(R.id.selected_text);
 
-        ServiceSpent serviceapp = this.getItem(position);
+        ServiceCollect serviceapp = this.getItem(position);
         if(serviceapp != null){
             title.setText(serviceapp.getNameservice());
         }
@@ -51,7 +45,7 @@ public class CategoryAdapter extends ArrayAdapter<ServiceSpent> {
         TextView suptext = convertView.findViewById(R.id.item_suptextCategory);
         ImageView images = convertView.findViewById(R.id.item_imageCategory);
 
-        ServiceSpent serviceapp = this.getItem(position);
+        ServiceCollect serviceapp = this.getItem(position);
         if(serviceapp != null){
             title.setText(serviceapp.getNameservice());
             suptext.setText(serviceapp.getExplain());

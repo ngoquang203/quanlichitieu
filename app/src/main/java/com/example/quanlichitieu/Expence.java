@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.quanlichitieu.apdaptermanagement.CategoryAdapter;
+import com.example.quanlichitieu.managementdata.ServiceSpent;
 import com.example.quanlichitieu.managementdata.Serviceapp;
 
 import java.sql.SQLException;
@@ -20,7 +21,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Expence extends AppCompatActivity {
-    private List<Serviceapp> serviceappList;
+    private List<ServiceSpent> serviceappList;
     private Spinner spinner;
     private CategoryAdapter categoryAdapter;
     private TextView dateTextInputEditText,timeTextInputEditText;
@@ -37,7 +38,7 @@ public class Expence extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expence);
         try {
-            serviceappList = Serviceapp.getuserlist();
+            serviceappList = ServiceSpent.getuserlist();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

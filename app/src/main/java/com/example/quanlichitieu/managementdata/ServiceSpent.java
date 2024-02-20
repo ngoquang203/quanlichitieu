@@ -1,60 +1,48 @@
 package com.example.quanlichitieu.managementdata;
 
-import android.util.Log;
-
 import com.example.quanlichitieu.sqlmanagement.SQLmanagement;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Serviceapp {
-    private String IDservice;
-    private String Nameservice;
-    private String Explain;
-    private String Images;
+public class ServiceSpent {
+    private String IDservicespent,Nameservice,Explain,Images;
 
-    public Serviceapp(String nameservice, String explain,String images) {
+    public ServiceSpent(String IDservicespent, String nameservice, String explain, String images) {
+        this.IDservicespent = IDservicespent;
         Nameservice = nameservice;
         Explain = explain;
         Images = images;
     }
 
-    public Serviceapp(String IDservice, String nameservice, String explain, String images) {
-        this.IDservice = IDservice;
-        Nameservice = nameservice;
-        Explain = explain;
-        Images = images;
-    }
-
-    public String getIDservice() {
-        return IDservice;
-    }
-
-    public void setIDservice(String IDservice) {
-        this.IDservice = IDservice;
-    }
-
-    public static ArrayList<Serviceapp> getuserlist() throws SQLException {
+    public static ArrayList<ServiceSpent> getuserlist() throws SQLException {
         Connection connection = SQLmanagement.connectionSQLSever();
-        ArrayList<Serviceapp> list = new ArrayList<>();
+        ArrayList<ServiceSpent> list = new ArrayList<>();
         Statement statement = connection.createStatement();// Tạo đối tượng Statement.
-        String sql = "select * from Serviceapp";
+        String sql = "select * from ServiceSpent";
         // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
         ResultSet rs = statement.executeQuery(sql);
         while (rs.next()) {
-            list.add(new Serviceapp(
-                    rs.getString("IDservice").trim(),
+            list.add(new ServiceSpent(
+                    rs.getString("IDservicespent").trim(),
                     rs.getString("Nameservice").trim(),
                     rs.getString("Explain").trim(),
                     rs.getString("Images").trim())
-                    );// Đọc dữ liệu từ ResultSet
+            );// Đọc dữ liệu từ ResultSet
         }
         connection.close();// Đóng kết nối
         return list;
+    }
+
+    public String getIDservicespent() {
+        return IDservicespent;
+    }
+
+    public void setIDservicespent(String IDservicespent) {
+        this.IDservicespent = IDservicespent;
     }
 
     public String getNameservice() {
@@ -72,6 +60,7 @@ public class Serviceapp {
     public void setExplain(String explain) {
         Explain = explain;
     }
+
     public String getImages() {
         return Images;
     }

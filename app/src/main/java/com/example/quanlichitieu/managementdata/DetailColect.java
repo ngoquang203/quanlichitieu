@@ -5,44 +5,83 @@ import android.util.Log;
 import com.example.quanlichitieu.sqlmanagement.SQLmanagement;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DetailColect {
-    private String IDservice;
+    private int IDdetailcolect;
+    private int IDcollect;
+
+    private String IDservicecollect;
     private float Price;
     private String Content;
+    private Date Dates;
 
-    public DetailColect(String IDservice, float price, String content) {
-        this.IDservice = IDservice;
+
+    public DetailColect(){};
+    public DetailColect(int IDDetailcolect, int IDcollect, String IDservicecollect, float price, String content, Date dates) {
+        IDdetailcolect = IDDetailcolect;
+        this.IDcollect = IDcollect;
+        this.IDservicecollect = IDservicecollect;
         Price = price;
         Content = content;
+        Dates = dates;
     }
 
-    public void getDataDetailColectSQL(){
-        try {
-            Connection connection = SQLmanagement.connectionSQLSever();
-            if(connection != null){
-                PreparedStatement ps = connection.prepareStatement("select * from Logins");
-                ResultSet rs = ps.executeQuery();
-                if(rs.next()){
-                    IDservice = rs.getString(3);
-                    Price = rs.getFloat(4);
-                    Content = rs.getString(5);
-                    Log.i("DATA",IDservice + "-" + Price + "-" + Content);
-                }
-                ps.close();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
+    public static DetailColect getuserlist(int IDcollect) throws SQLException {
+
+        Connection connection = SQLmanagement.connectionSQLSever();
+        Statement statement = connection.createStatement();// Tạo đối tượng Statement.
+        String sql = "select * from DetailColect where IDcollect = '" + IDcollect + "'";
+        // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
+        ResultSet rs = statement.executeQuery(sql);
+        DetailColect detailColect = new DetailColect();
+        while(rs.next()){
+            detailColect = new DetailColect(
+                rs.getInt("IDdetailcolect"),
+                rs.getInt("IDcollect"),
+                    rs.getString("IDservicecollect"),
+                rs.getFloat("Price"),
+                rs.getString("Content"),
+                    rs.getDate("Dates")
+            );
         }
-    }
-    public String getIDservice() {
-        return IDservice;
+        // Đọc dữ liệu từ ResultSet
+        connection.close();// Đóng kết nối
+        return detailColect;
     }
 
-    public void setIDservice(String IDservice) {
-        this.IDservice = IDservice;
+    public void Insert(int IDcollect,String IDservicecollect,float Price,String Content,String Date) throws SQLException {
+        Connection connection = SQLmanagement.connectionSQLSever();
+        // Thực thi câu lệnh SQL để kiểm tra ID
+        Statement statement = connection.createStatement();
+
+            String sqlInserDetailCollect = "insert into DetailColect(IDcollect,IDservicecollect,Price,Content,Dates) values ("+
+                     IDcollect + ",'" + IDservicecollect +"'," + Price + ",'" + Content + "','" + Date+ "')";
+
+            statement.executeUpdate(sqlInserDetailCollect);
+
+        // Đóng kết nối đến SQL Server
+        connection.close();
+    }
+
+    public int getIDcollect() {
+        return IDcollect;
+    }
+
+    public void setIDcollect(int IDcollect) {
+        this.IDcollect = IDcollect;
+    }
+
+    public String getIDservicecollect() {
+        return IDservicecollect;
+    }
+
+    public void setIDservicecollect(String IDservicecollect) {
+        this.IDservicecollect = IDservicecollect;
     }
 
     public float getPrice() {
@@ -59,5 +98,13 @@ public class DetailColect {
 
     public void setContent(String content) {
         Content = content;
+    }
+
+    public Date getDates() {
+        return Dates;
+    }
+
+    public void setDates(Date dates) {
+        Dates = dates;
     }
 }
