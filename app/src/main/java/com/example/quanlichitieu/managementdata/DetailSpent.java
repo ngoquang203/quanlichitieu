@@ -52,14 +52,14 @@ public class DetailSpent {
         return detailSpent;
     }
 
-    public void Insert(int IDspent,String IDservicespent,float Price,String Content,String Date) throws SQLException {
+    public void Insert(int IDspent,String IDservicespent,String Price,String Content,String Date) throws SQLException {
         Connection connection = SQLmanagement.connectionSQLSever();
         // Thực thi câu lệnh SQL để kiểm tra ID
         Statement statement = connection.createStatement();
 
         String sqlInserDetailSpent = "insert into DetailSpent(IDspent,IDservicespent,Price,Content,Dates) values ("+
                 IDspent + ",'" + IDservicespent +"'," + Price + ",'" + Content + "','" + Date+ "')";
-
+        Log.e("add Expence : ",sqlInserDetailSpent);
         statement.executeUpdate(sqlInserDetailSpent);
 
         // Đóng kết nối đến SQL Server

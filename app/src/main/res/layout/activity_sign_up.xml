@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_input"
                 android:ems="10"
-                android:hint="Email"
+                android:hint="ID"
                 android:inputType="text"
                 android:textColorHint="@color/dark50"
                 android:textSize="@dimen/title3" />

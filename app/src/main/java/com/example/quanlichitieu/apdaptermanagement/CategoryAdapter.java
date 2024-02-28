@@ -1,23 +1,18 @@
 package com.example.quanlichitieu.apdaptermanagement;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.quanlichitieu.Income;
 import com.example.quanlichitieu.R;
-import com.example.quanlichitieu.managementdata.ServiceCollect;
 import com.example.quanlichitieu.managementdata.ServiceSpent;
-import com.example.quanlichitieu.managementdata.Serviceapp;
 
 import java.util.List;
 

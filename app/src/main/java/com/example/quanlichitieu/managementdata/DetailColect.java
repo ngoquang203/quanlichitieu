@@ -54,14 +54,14 @@ public class DetailColect {
         return detailColect;
     }
 
-    public void Insert(int IDcollect,String IDservicecollect,float Price,String Content,String Date) throws SQLException {
+    public void Insert(int IDcollect,String IDservicecollect,String Price,String Content,String Date) throws SQLException {
         Connection connection = SQLmanagement.connectionSQLSever();
         // Thực thi câu lệnh SQL để kiểm tra ID
         Statement statement = connection.createStatement();
 
             String sqlInserDetailCollect = "insert into DetailColect(IDcollect,IDservicecollect,Price,Content,Dates) values ("+
-                     IDcollect + ",'" + IDservicecollect +"'," + Price + ",'" + Content + "','" + Date+ "')";
-
+                     IDcollect + ",'" + IDservicecollect +"'," + Price + ",'" + Content + "','" + Date + "')";
+            Log.e("add Income : ",sqlInserDetailCollect);
             statement.executeUpdate(sqlInserDetailCollect);
 
         // Đóng kết nối đến SQL Server
