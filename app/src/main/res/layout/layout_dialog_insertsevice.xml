@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/regular2"
+    android:background="@drawable/background_input">
+    <TextView
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nhập dịch vụ muốn thêm"
+        android:textSize="@dimen/title2"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/title2"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintEnabled="false"
+        android:layout_marginTop="@dimen/regular2">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialog_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_input"
+            android:ems="10"
+            android:hint=""
+            android:inputType="text"
+            android:textSize="@dimen/title3"
+            android:layout_marginTop="10dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:id="@+id/dialog_buttonAddService"
+        android:theme="@style/Base.Theme.ThemeBlue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thêm"
+        android:textStyle="bold"
+        android:textSize="@dimen/title2"
+        android:layout_marginTop="@dimen/regular2"
+        android:background="@drawable/background_input"/>
+</LinearLayout>

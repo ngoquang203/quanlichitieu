@@ -10,23 +10,27 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 
 public class DetailSpent {
    private int IDdetailspent;
    private int IDspent;
-   private String IDservicespent;
+   private String IDservicespent,Nameservice;
    private float Price;
    private String Content;
    private Date Dates;
+   private Time Times;
 
    public DetailSpent(){};
-    public DetailSpent(int IDdetailspent, int IDspent, String IDservicespent, float price, String content, Date dates) {
+    public DetailSpent(int IDdetailspent, int IDspent, String IDservicespent,String nameservice, float price, String content, Date dates,Time times) {
         this.IDdetailspent = IDdetailspent;
         this.IDspent = IDspent;
         this.IDservicespent = IDservicespent;
+        Nameservice = nameservice;
         Price = price;
         Content = content;
         Dates = dates;
+        Times = times;
     }
 
     public static DetailSpent getuserlist(int IDspent) throws SQLException {
@@ -42,9 +46,11 @@ public class DetailSpent {
                     rs.getInt("IDdetailspent"),
                     rs.getInt("IDspent"),
                     rs.getString("IDservicespent"),
+                    rs.getString("Nameservice"),
                     rs.getFloat("Price"),
                     rs.getString("Content"),
-                    rs.getDate("Dates")
+                    rs.getDate("Dates"),
+                    rs.getTime("Times")
             );
         }
         // Đọc dữ liệu từ ResultSet
@@ -52,13 +58,13 @@ public class DetailSpent {
         return detailSpent;
     }
 
-    public void Insert(int IDspent,String IDservicespent,String Price,String Content,String Date) throws SQLException {
+    public void Insert(int IDspent,String IDservicespent,String Nameservice,String Price,String Content,String Date,String Times) throws SQLException {
         Connection connection = SQLmanagement.connectionSQLSever();
         // Thực thi câu lệnh SQL để kiểm tra ID
         Statement statement = connection.createStatement();
 
-        String sqlInserDetailSpent = "insert into DetailSpent(IDspent,IDservicespent,Price,Content,Dates) values ("+
-                IDspent + ",'" + IDservicespent +"'," + Price + ",'" + Content + "','" + Date+ "')";
+        String sqlInserDetailSpent = "insert into DetailSpent(IDspent,IDservicespent,Nameservice,Price,Content,Dates,Times) values ("+
+                IDspent + ",'" + IDservicespent +"',N'" + Nameservice + "'," + Price + ",N'" + Content + "','" + Date+ "','" + Times + "')";
         Log.e("add Expence : ",sqlInserDetailSpent);
         statement.executeUpdate(sqlInserDetailSpent);
 
@@ -66,7 +72,13 @@ public class DetailSpent {
         connection.close();
     }
 
+    public String getNameservice() {
+        return Nameservice;
+    }
 
+    public void setNameservice(String nameservice) {
+        Nameservice = nameservice;
+    }
 
     public int getIDdetailspent() {
         return IDdetailspent;

@@ -31,7 +31,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Expence"
+                android:text="Chi tiền"
                 android:textSize="@dimen/title1"
                 android:textStyle="bold"
                 android:textColor="@color/light100"/>
@@ -42,7 +42,7 @@
             android:textSize="@dimen/title2"
             android:textStyle="bold"
             android:textColor="@color/light20"
-            android:text="How much?"
+            android:text="Bao nhiêu?"
             android:layout_marginTop="50dp"
             />
 
@@ -56,14 +56,14 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_border"
                 android:ems="10"
-                android:hint="$0"
+                android:hint="0"
                 android:inputType="number"
                 android:textSize="@dimen/title3"
                 android:layout_marginTop="10dp"/>
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
     <LinearLayout
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_input"
                 android:ems="10"
-                android:hint="Description"
+                android:hint="Ghi chú"
                 android:inputType="text"
                 android:textSize="@dimen/title3"
                 android:layout_marginTop="10dp"/>
@@ -93,7 +93,7 @@
             android:id="@+id/expence_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Date"
+            android:text="Ngày"
             android:layout_marginTop="@dimen/regular2"
             android:textSize="@dimen/title2"
             android:background="@drawable/background_input"
@@ -103,20 +103,20 @@
             android:id="@+id/expence_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Time"
+            android:text="Thời gian"
             android:layout_marginTop="@dimen/regular2"
             android:textSize="@dimen/title2"
             android:background="@drawable/background_input"
             android:drawableEnd="@drawable/edit"/>
 
         <Button
-            android:theme="@style/Base.Theme.ThemeViolet"
+            android:theme="@style/Base.Theme.ThemeRed"
             android:id="@+id/expence_button"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="@dimen/regular2"
             android:background="@drawable/background_button"
-            android:text="Add"
+            android:text="Thêm"
             android:textSize="@dimen/title2" />
 
     </LinearLayout>

@@ -5,13 +5,10 @@
         android:title="Home"/>
     <item android:id="@+id/menu_transaction"
         android:icon="@drawable/transaction"
-        android:title="Transaction"/>
-    <item android:id="@+id/menu_add"
-        android:icon="@drawable/add"
-        android:title="Add"/>
+        android:title="Lịch sử"/>
     <item android:id="@+id/menu_budget"
         android:icon="@drawable/pie_chart"
-        android:title="Budget"/>
+        android:title="Thống kê"/>
     <item android:id="@+id/menu_profile"
         android:icon="@drawable/user"
         android:title="Profile"/>

@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/title1"
-            android:text="Transition"
+            android:text="Lịch sử"
             android:textStyle="bold"
             android:gravity="center"/>
         <Button

@@ -63,7 +63,8 @@ public class TransactionFragment extends Fragment {
         buttonIncome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickButtonSort(view);
+
+                clickButtonSort();
             }
         });
         // Inflate the layout for this fragment
@@ -80,20 +81,12 @@ public class TransactionFragment extends Fragment {
         return view;
     }
 
-    public void clickButtonSort(View view){
-        final Dialog dialog = new Dialog(view.getContext());
+    public void clickButtonSort(){
+        Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.layout_dialog_sort);
         dialog.setCancelable(true);
-        Window window = dialog.getWindow();
-        if(window == null){
-            return;
-        }
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        WindowManager.LayoutParams layoutParams = window.getAttributes();
-        layoutParams.gravity = Gravity.BOTTOM;
-        window.setAttributes(layoutParams);
+        dialog.show();
     }
 
 }

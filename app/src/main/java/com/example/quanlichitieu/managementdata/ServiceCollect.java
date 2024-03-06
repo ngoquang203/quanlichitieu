@@ -11,13 +11,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ServiceCollect {
-    private String IDservicecollect,Nameservice,Explain,Images;
+    private String IDservicecollect,Nameservice,Explain;
 
-    public ServiceCollect(String IDservicecollect, String nameservice, String explain, String images) {
+    public ServiceCollect(String IDservicecollect, String nameservice, String explain) {
         this.IDservicecollect = IDservicecollect;
         Nameservice = nameservice;
         Explain = explain;
-        Images = images;
     }
 
     public static ArrayList<ServiceCollect> getuserlist() throws SQLException {
@@ -31,8 +30,7 @@ public class ServiceCollect {
             list.add(new ServiceCollect(
                     rs.getString("IDservicecollect").trim(),
                     rs.getString("Nameservice").trim(),
-                    rs.getString("Explain").trim(),
-                    rs.getString("Images").trim())
+                    rs.getString("Explain").trim())
             );// Đọc dữ liệu từ ResultSet
         }
         connection.close();// Đóng kết nối
@@ -63,11 +61,5 @@ public class ServiceCollect {
         Explain = explain;
     }
 
-    public String getImages() {
-        return Images;
-    }
 
-    public void setImages(String images) {
-        Images = images;
-    }
 }

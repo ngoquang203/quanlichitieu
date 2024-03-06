@@ -66,12 +66,9 @@ public class Home extends AppCompatActivity {
                         bottomNavigationView.getMenu().findItem(R.id.menu_transaction).setChecked(true);
                         break;
                     case 2:
-                        bottomNavigationView.getMenu().findItem(R.id.menu_add).setChecked(true);
-                        break;
-                    case 3:
                         bottomNavigationView.getMenu().findItem(R.id.menu_budget).setChecked(true);
                         break;
-                    case 4:
+                    case 3:
                         bottomNavigationView.getMenu().findItem(R.id.menu_profile).setChecked(true);
                         break;
                 }
@@ -86,14 +83,11 @@ public class Home extends AppCompatActivity {
                 else if(item.getItemId() == R.id.menu_transaction){
                     viewPager.setCurrentItem(1);
                 }
-                else if(item.getItemId() == R.id.menu_add){
+                else if(item.getItemId() == R.id.menu_budget){
                     viewPager.setCurrentItem(2);
                 }
-                else if(item.getItemId() == R.id.menu_budget){
-                    viewPager.setCurrentItem(3);
-                }
                 else if(item.getItemId() == R.id.menu_profile){
-                    viewPager.setCurrentItem(4);
+                    viewPager.setCurrentItem(3);
                 }
                 return true;
             }

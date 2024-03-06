@@ -11,25 +11,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/regular2">
+            android:paddingHorizontal="@dimen/regular2"
+            android:gravity="center">
             <ImageButton
                 android:id="@+id/signup_back"
-                android:layout_width="48dp"
+                android:layout_width="80dp"
                 android:layout_height="48dp"
                 android:src="@drawable/arrowleft"
                 android:background="@drawable/background_nobutton"
-                android:contentDescription="@string/app_avatar"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+                android:contentDescription="@string/app_avatar"/>
             <TextView
                 android:gravity="center"
-                android:layout_gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sign Up"
+                android:text="Đăng kí"
                 android:textSize="@dimen/title1"
                 android:textStyle="bold"
                 android:textColor="@color/dark100"/>
+            <TextView
+                android:layout_width="48dp"
+                android:layout_height="40dp"
+                android:text=""/>
         </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,10 +40,13 @@
         android:padding="@dimen/title1">
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/signup_textInputLayoutName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:hintEnabled="false"
-            android:layout_marginTop="20dp">
+            app:errorEnabled="true"
+            android:layout_marginTop="10dp"
+            app:helperTextTextColor="@color/red100">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/signup_name"
@@ -49,17 +54,21 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_input"
                 android:ems="10"
-                android:hint="Name"
+                android:hint="Tên tài khoản"
                 android:inputType="text"
                 android:textColorHint="@color/dark50"
                 android:textSize="@dimen/title3" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signup_textInputLayoutID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:hintEnabled="false"
-            android:layout_marginTop="30dp">
+            app:errorEnabled="true"
+            android:layout_marginTop="15dp"
+
+            app:helperTextTextColor="@color/red100">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/signup_email"
@@ -74,11 +83,14 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signup_textInputLayoutPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             app:hintEnabled="false"
-            app:endIconMode="password_toggle">
+            app:errorEnabled="true"
+            app:endIconMode="password_toggle"
+            app:helperTextTextColor="@color/red100">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/signup_password"
@@ -86,7 +98,28 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_input"
                 android:ems="10"
-                android:hint="PassWord"
+                android:hint="Mật khẩu"
+                android:inputType="textPassword"
+                android:textColorHint="@color/dark50"
+                android:textSize="@dimen/title3" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signup_textInputLayoutConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:hintEnabled="false"
+            app:errorEnabled="true"
+            app:endIconMode="password_toggle"
+            app:helperTextTextColor="@color/red100">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signup_passwordConfirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_input"
+                android:ems="10"
+                android:hint="Xác nhân mật khẩu"
                 android:inputType="textPassword"
                 android:textColorHint="@color/dark50"
                 android:textSize="@dimen/title3" />
@@ -95,7 +128,7 @@
             android:id="@+id/signup_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="By signing up, you agree to the Terms of Service and Privacy Policy"
+            android:text="Bằng cách đăng ký, bạn đồng ý với Điều khoản dịch vụ và Chính sách quyền riêng tư"
             android:textSize="@dimen/regular2"
             android:layout_marginTop="20dp"/>
         <Button
@@ -107,7 +140,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/background_button"
-            android:text="Sign Up"
+            android:text="Đăng kí"
             android:textSize="@dimen/title2" />
     </LinearLayout>
 </LinearLayout>

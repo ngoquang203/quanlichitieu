@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.quanlichitieu.Income;
+
 public class ViewPageAdapter extends FragmentStateAdapter{
 
 
@@ -24,10 +26,8 @@ public class ViewPageAdapter extends FragmentStateAdapter{
             case 1:
                 return new TransactionFragment();
             case 2:
-                return new AddFragment();
-            case 3:
                 return new BudgetFragment();
-            case 4:
+            case 3:
                 return new ProfileFragment();
             default:
                 return new MainFragment();
@@ -36,6 +36,6 @@ public class ViewPageAdapter extends FragmentStateAdapter{
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 4;
     }
 }

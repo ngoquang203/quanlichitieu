@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Home"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/light100">
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,9 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:menu="@menu/navigator"
-        app:itemBackground="@color/light100"
+        app:itemBackground="@color/light60"
         app:itemIconSize="@dimen/title1"
-        app:itemIconTint="@color/violet60"
-        app:itemTextColor="@color/violet60">
+        app:itemIconTint="@color/blue80"
+        app:itemTextColor="@color/blue100">
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 </RelativeLayout>

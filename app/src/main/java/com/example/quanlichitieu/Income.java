@@ -23,6 +23,7 @@ import com.example.quanlichitieu.managementdata.ServiceCollect;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.sql.SQLException;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -44,7 +45,7 @@ public class Income extends AppCompatActivity {
     private TextInputEditText income_description;
     private Button income_button;
     private ImageButton income_back;
-    private String Money,Description,IDservice,dates,times;
+    private String Money,Description,IDservice,dates,times,Nameservice;
     private SharedPreferences sharedPreferences;
     private int IDcollect;
 
@@ -57,10 +58,13 @@ public class Income extends AppCompatActivity {
         List<ServiceCollect> list;
         try {
             list = ServiceCollect.getuserlist();
+            for(int i = 0;i<list.size();++i){
+                Log.e("List : " + i,list.get(i).getNameservice());
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        IDservice = list.get(spinner.getSelectedItemPosition()).getNameservice();
+
         income_back = findViewById(R.id.income_back);
 
         income_money = findViewById(R.id.income_money);
@@ -148,6 +152,7 @@ public class Income extends AppCompatActivity {
                 Description = income_description.getText().toString();
 
                 IDservice = serviceappList.get(spinner.getSelectedItemPosition()).getIDservicecollect();
+                Nameservice = serviceappList.get(spinner.getSelectedItemPosition()).getNameservice();
                 dates = dateTextInputEditText.getText().toString();
                 times = timeTextInputEditText.getText().toString();
                 // Định dạng pattern đầu vào
@@ -158,19 +163,19 @@ public class Income extends AppCompatActivity {
 
                 // Chuyển đổi chuỗi sang Date
                 Date date = null;
+                Time time = null;
                 try {
                     date = sdf1.parse(dates);
-                } catch (ParseException e) {
+                                    } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
 
                 // Định dạng Date sang chuỗi mới
                 String formattedString = sdf2.format(date);
                 if(Money.length() != 0 && Description.length() != 0){
-
                     DetailColect detailColect = new DetailColect();
                     try {
-                        detailColect.Insert(IDcollect,IDservice,Money,Description,formattedString + " " + times);
+                        detailColect.Insert(IDcollect,IDservice,Nameservice,Money,Description,formattedString,times);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -184,7 +189,7 @@ public class Income extends AppCompatActivity {
         income_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Income.this,AddFragment.class);
+                Intent intent = new Intent(Income.this,Home.class);
                 startActivity(intent);
             }
         });

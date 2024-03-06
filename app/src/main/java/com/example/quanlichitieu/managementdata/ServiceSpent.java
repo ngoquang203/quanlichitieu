@@ -9,13 +9,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ServiceSpent {
-    private String IDservicespent,Nameservice,Explain,Images;
+    private String IDservicespent,Nameservice,Explain;
 
-    public ServiceSpent(String IDservicespent, String nameservice, String explain, String images) {
+    public ServiceSpent(String IDservicespent, String nameservice, String explain) {
         this.IDservicespent = IDservicespent;
         Nameservice = nameservice;
         Explain = explain;
-        Images = images;
     }
 
     public static ArrayList<ServiceSpent> getuserlist() throws SQLException {
@@ -29,8 +28,7 @@ public class ServiceSpent {
             list.add(new ServiceSpent(
                     rs.getString("IDservicespent").trim(),
                     rs.getString("Nameservice").trim(),
-                    rs.getString("Explain").trim(),
-                    rs.getString("Images").trim())
+                    rs.getString("Explain").trim())
             );// Đọc dữ liệu từ ResultSet
         }
         connection.close();// Đóng kết nối
@@ -59,13 +57,5 @@ public class ServiceSpent {
 
     public void setExplain(String explain) {
         Explain = explain;
-    }
-
-    public String getImages() {
-        return Images;
-    }
-
-    public void setImages(String images) {
-        Images = images;
     }
 }

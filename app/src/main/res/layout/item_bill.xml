@@ -10,15 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@drawable/background_input">
-        <ImageButton
-            android:background="@drawable/background_input"
-            android:layout_gravity="center"
-            android:layout_weight="0.5"
-            android:id="@+id/bill_images"
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/car"
-            android:contentDescription="@string/app_avatar"/>
+
         <LinearLayout
             android:layout_marginLeft="@dimen/regular2"
             android:layout_gravity="center"
@@ -38,29 +30,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="supText"
-                android:textSize="@dimen/regular2"/>
+                android:textSize="@dimen/regular2"
+                android:layout_marginTop="@dimen/regular2"/>
         </LinearLayout>
         <LinearLayout
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/regular2">
             <TextView
+                android:gravity="end"
                 android:id="@+id/bill_money"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Menoy"
                 android:textStyle="bold"
                 android:textSize="@dimen/title2"/>
             <TextView
+                android:gravity="end"
                 android:id="@+id/bill_time"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Time"
                 android:textSize="@dimen/regular2"/>
             <TextView
+                android:gravity="end"
                 android:id="@+id/bill_date"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Date"
                 android:textSize="@dimen/regular2"/>

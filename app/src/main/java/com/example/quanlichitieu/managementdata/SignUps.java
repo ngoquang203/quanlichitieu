@@ -38,8 +38,8 @@ public class SignUps {
             statement.executeUpdate(sqlInsert);
             statement.executeUpdate(sqlInsertUsers);
             int IDUsers = Users.getuserlist(Email).getIDusers();
-            String sqlInserIDcollect = "insert into CollectMoney(IDuser) values(" + IDUsers + ")";
-            String sqlInsertIDspent = "insert into SpentMoney(IDuser) values(" + IDUsers + ")";
+            String sqlInserIDcollect = "insert into CollectMoney(IDuser,SumCollect) values(" + IDUsers + ",0)";
+            String sqlInsertIDspent = "insert into SpentMoney(IDuser,SumSpent) values(" + IDUsers + ",0)";
             String sqlInsertIDplan = "insert into PlanMonney(IDuser) values(" + IDUsers + ")";
             statement.executeUpdate(sqlInserIDcollect);
             statement.executeUpdate(sqlInsertIDspent);

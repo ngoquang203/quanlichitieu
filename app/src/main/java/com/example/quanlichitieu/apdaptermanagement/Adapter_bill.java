@@ -1,6 +1,7 @@
 package com.example.quanlichitieu.apdaptermanagement;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -48,7 +50,6 @@ public class Adapter_bill extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = layoutInflater.inflate(R.layout.item_bill,null);
-        ImageButton imageButton = convertView.findViewById(R.id.bill_images);
         TextView title = convertView.findViewById(R.id.bill_title);
         TextView supText = convertView.findViewById(R.id.bill_supText);
         TextView money = convertView.findViewById(R.id.bill_money);
@@ -57,13 +58,18 @@ public class Adapter_bill extends BaseAdapter {
 
         Bill_data billData = arrayList.get(position);
         if(billData != null){
-            Context context = imageButton.getContext();
-            int id = context.getResources().getIdentifier(billData.getImages(), "drawable", context.getPackageName());
-            imageButton.setImageResource(id);
+            if(billData.getIdDataCategory()%2==0){
+                money.setText("-"+String.valueOf(billData.getPrice()));
+                money.setTextColor(Color.RED);
+            }
+            else{
+                money.setText("+"+String.valueOf(billData.getPrice()));
+                money.setTextColor(Color.GREEN);
+            }
             title.setText(billData.getNameservice());
             supText.setText(billData.getContent());
-//            money.setText(String.valueOf(billData.getPrice()));
-            time.setText((billData.getDates().toString()));
+
+            time.setText((billData.getTimes().toString()));
             date.setText((billData.getDates().toString()));
         }
         return convertView;

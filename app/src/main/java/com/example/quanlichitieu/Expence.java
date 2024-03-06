@@ -2,7 +2,9 @@ package com.example.quanlichitieu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.quanlichitieu.apdaptermanagement.CategoryAdapter;
 import com.example.quanlichitieu.fragment.AddFragment;
@@ -40,9 +43,10 @@ public class Expence extends AppCompatActivity {
     private TextInputEditText expence_description;
     private Button expence_button;
     private ImageButton expence_back;
-    private String Money,Description,IDservice,dates,times;
+    private String Money,Description,IDservice,dates,times,Nameservice;
     private SharedPreferences sharedPreferences;
     private int IDspent;
+    private float SumCollect,SumSpent,SumNow;
 
     private void Init(){
         spinner = findViewById(R.id.expence_spinner);
@@ -64,7 +68,9 @@ public class Expence extends AppCompatActivity {
         expence_button = findViewById(R.id.expence_button);
         sharedPreferences = getSharedPreferences("loginData",MODE_PRIVATE);
         IDspent = sharedPreferences.getInt("IDspent",0);
-
+        SumCollect = sharedPreferences.getFloat("SumCollect",0);
+        SumSpent = sharedPreferences.getFloat("SumSpent",0);
+        SumNow = SumCollect - SumSpent;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +150,7 @@ public class Expence extends AppCompatActivity {
                 Description = expence_description.getText().toString();
 
                 IDservice = serviceappList.get(spinner.getSelectedItemPosition()).getIDservicespent();
+                Nameservice = serviceappList.get(spinner.getSelectedItemPosition()).getNameservice();
                 dates = dateTextInputEditText.getText().toString();
                 times = timeTextInputEditText.getText().toString();
                 // Định dạng pattern đầu vào
@@ -160,18 +167,35 @@ public class Expence extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
 
-                // Định dạng Date sang chuỗi mới
-                String formattedString = sdf2.format(date);
-                if(Money.length() != 0 && Description.length() != 0){
+                if(SumNow - Float.valueOf(Money) < 0){
+                    Dialog dialog = new Dialog(Expence.this);
+                    dialog.setContentView(R.layout.layout_dialog_notification);
+                    TextView title = dialog.findViewById(R.id.dialog_notification_Tilte);
+                    TextView messenge = dialog.findViewById(R.id.layout_notification_messenge);
+                    ImageButton button = dialog.findViewById(R.id.layout_notification_button);
+                    title.setText("Thông báo");
+                    messenge.setText("Số tiền chi của bạn vượt số tiền hiện có");
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
+                }else{
+                    // Định dạng Date sang chuỗi mới
+                    String formattedString = sdf2.format(date);
+                    if(Money.length() != 0 && Description.length() != 0 ){
 
-                    DetailSpent detailSpent = new DetailSpent();
-                    try {
-                        detailSpent.Insert(IDspent,IDservice,Money,Description,formattedString + " " + times);
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
+                        DetailSpent detailSpent = new DetailSpent();
+                        try {
+                            detailSpent.Insert(IDspent,IDservice,Nameservice,Money,Description,formattedString, times);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Intent intent = new Intent(Expence.this,Home.class);
+                        startActivity(intent);
                     }
-                    Intent intent = new Intent(Expence.this,Home.class);
-                    startActivity(intent);
                 }
             }
         });
@@ -180,7 +204,7 @@ public class Expence extends AppCompatActivity {
         expence_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Expence.this, AddFragment.class);
+                Intent intent = new Intent(Expence.this, Home.class);
                 startActivity(intent);
             }
         });
