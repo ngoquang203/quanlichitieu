@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quanlichitieu.Expence;
@@ -54,6 +55,8 @@ public class TransactionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_transaction, container, false);
         Button buttonIncome = view.findViewById(R.id.transition_buttonImages);
         ListView viewPager2 = view.findViewById(R.id.transiton_viewpager2);
+        TextView textView = view.findViewById(R.id.transiton_textViewErron);
+
         Adapter_bill adapterBill;
 
         sharedPreferences = getActivity().getSharedPreferences("loginData",MODE_PRIVATE);
@@ -72,12 +75,22 @@ public class TransactionFragment extends Fragment {
         ArrayList<Bill_data> listData = new ArrayList<>();
         try {
             listData = Bill_data.getuserList(IDcollect,IDspent);
-            adapterBill = new Adapter_bill(getContext(),listData);
-            viewPager2.setAdapter(adapterBill);
+
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        if(listData.isEmpty()){
+            textView.setVisibility(View.VISIBLE);
+            viewPager2.setVisibility(View.GONE);
+        }
+        else{
+            textView.setVisibility(View.GONE);
+            viewPager2.setVisibility(View.VISIBLE);
+        }
+        adapterBill = new Adapter_bill(getContext(),listData);
+        viewPager2.setAdapter(adapterBill);
         return view;
     }
 
@@ -88,5 +101,8 @@ public class TransactionFragment extends Fragment {
         dialog.setCancelable(true);
         dialog.show();
     }
+
+
+
 
 }

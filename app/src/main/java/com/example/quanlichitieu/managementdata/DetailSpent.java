@@ -16,13 +16,13 @@ public class DetailSpent {
    private int IDdetailspent;
    private int IDspent;
    private String IDservicespent,Nameservice;
-   private float Price;
+   private long Price;
    private String Content;
    private Date Dates;
    private Time Times;
 
    public DetailSpent(){};
-    public DetailSpent(int IDdetailspent, int IDspent, String IDservicespent,String nameservice, float price, String content, Date dates,Time times) {
+    public DetailSpent(int IDdetailspent, int IDspent, String IDservicespent,String nameservice, long price, String content, Date dates,Time times) {
         this.IDdetailspent = IDdetailspent;
         this.IDspent = IDspent;
         this.IDservicespent = IDservicespent;
@@ -47,7 +47,7 @@ public class DetailSpent {
                     rs.getInt("IDspent"),
                     rs.getString("IDservicespent"),
                     rs.getString("Nameservice"),
-                    rs.getFloat("Price"),
+                    rs.getLong("Price"),
                     rs.getString("Content"),
                     rs.getDate("Dates"),
                     rs.getTime("Times")
@@ -104,11 +104,11 @@ public class DetailSpent {
         this.IDservicespent = IDservicespent;
     }
 
-    public float getPrice() {
+    public long getPrice() {
         return Price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(long price) {
         Price = price;
     }
 

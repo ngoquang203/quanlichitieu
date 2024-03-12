@@ -15,12 +15,12 @@ import java.util.Date;
 
 public class PlanMonney {
     private int IDuser,IDplan;
-    private float Summoney;
+    private long Summoney;
     private Date Dates;
     private String Contents;
 
     public PlanMonney(){};
-    public PlanMonney(int IDuser, int IDplan, float summoney, Date dates, String contents) {
+    public PlanMonney(int IDuser, int IDplan, long summoney, Date dates, String contents) {
         this.IDuser = IDuser;
         this.IDplan = IDplan;
         Summoney = summoney;
@@ -48,7 +48,7 @@ public class PlanMonney {
             planMonney = new PlanMonney(
                     rs.getInt("IDuser"),
                     rs.getInt("IDplan"),
-                    rs.getFloat("Summoney"),
+                    rs.getLong("Summoney"),
                     rs.getDate("Dates"),
                     rs.getString("Content")
             );
@@ -74,11 +74,11 @@ public class PlanMonney {
         this.IDplan = IDplan;
     }
 
-    public float getSummoney() {
+    public long getSummoney() {
         return Summoney;
     }
 
-    public void setSummoney(float summoney) {
+    public void setSummoney(long summoney) {
         Summoney = summoney;
     }
 

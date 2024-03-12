@@ -67,7 +67,7 @@ public class Login extends AppCompatActivity {
                     }
                     if(count){
                         int IDuser,IDcollect,IDspent,IDplan;
-                        float SumCollect,SumSpent;
+                        long SumCollect,SumSpent;
 
                         IDuser = Users.getuserlist(email).getIDusers();
                         CollectMoney collectMoney = CollectMoney.getuserlist(IDuser);
@@ -84,8 +84,8 @@ public class Login extends AppCompatActivity {
                         sharedPreferences.edit().putInt("IDcollect",IDcollect).apply();
                         sharedPreferences.edit().putInt("IDspent",IDspent).apply();
                         sharedPreferences.edit().putInt("IDplan",IDplan).apply();
-                        sharedPreferences.edit().putFloat("SumCollect",SumCollect).apply();
-                        sharedPreferences.edit().putFloat("SumSpent",SumSpent).apply();
+                        sharedPreferences.edit().putLong("SumCollect",SumCollect).apply();
+                        sharedPreferences.edit().putLong("SumSpent",SumSpent).apply();
 
                         Intent intent = new Intent(Login.this,Home.class);
                         intent.putExtra("key_email",email);

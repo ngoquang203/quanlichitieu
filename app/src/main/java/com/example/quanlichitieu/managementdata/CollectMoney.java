@@ -14,10 +14,10 @@ import java.util.Date;
 public class CollectMoney {
 
    private int IDUsers,IDCollect;
-    private float SumCollect;
+    private long SumCollect;
 
     public CollectMoney(){};
-    public CollectMoney(int IDUsers, int IDCollect, float sumCollect) {
+    public CollectMoney(int IDUsers, int IDCollect, long sumCollect) {
         this.IDUsers = IDUsers;
         this.IDCollect = IDCollect;
         SumCollect = sumCollect;
@@ -41,7 +41,7 @@ public class CollectMoney {
             collectMoney = new CollectMoney(
                     rs.getInt("IDuser"),
                     rs.getInt("IDcollect"),
-                    rs.getFloat("SumCollect"));
+                    rs.getLong("SumCollect"));
         }
         // Đọc dữ liệu từ ResultSet
         connection.close();// Đóng kết nối
@@ -64,11 +64,11 @@ public class CollectMoney {
         this.IDCollect = IDCollect;
     }
 
-    public float getSumCollect() {
+    public long getSumCollect() {
         return SumCollect;
     }
 
-    public void setSumCollect(float sumCollect) {
+    public void setSumCollect(long sumCollect) {
         SumCollect = sumCollect;
     }
 }

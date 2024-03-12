@@ -2,6 +2,7 @@ package com.example.quanlichitieu.apdaptermanagement;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,7 @@ public class Adapter_bill extends BaseAdapter {
         TextView date = convertView.findViewById(R.id.bill_date);
 
         Bill_data billData = arrayList.get(position);
+        Log.e("Test",billData.getNameservice());
         if(billData != null){
             if(billData.getIdDataCategory()%2==0){
                 money.setText("-"+String.valueOf(billData.getPrice()));

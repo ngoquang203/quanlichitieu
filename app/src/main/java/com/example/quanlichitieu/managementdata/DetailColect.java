@@ -17,14 +17,14 @@ public class DetailColect {
     private int IDcollect;
 
     private String IDservicecollect,Nameservice;
-    private float Price;
+    private long Price;
     private String Content;
     private Date Dates;
     private Time Times;
 
 
     public DetailColect(){};
-    public DetailColect(int IDDetailcolect, int IDcollect, String IDservicecollect,String nameservice, float price, String content, Date dates,Time times) {
+    public DetailColect(int IDDetailcolect, int IDcollect, String IDservicecollect,String nameservice, long price, String content, Date dates,Time times) {
         IDdetailcolect = IDDetailcolect;
         this.IDcollect = IDcollect;
         this.IDservicecollect = IDservicecollect;
@@ -49,7 +49,7 @@ public class DetailColect {
                 rs.getInt("IDcollect"),
                     rs.getString("IDservicecollect"),
                 rs.getString("Nameservice"),
-                rs.getFloat("Price"),
+                rs.getLong("Price"),
                 rs.getString("Content"),
                     rs.getDate("Dates"),
                     rs.getTime("Times")
@@ -98,11 +98,11 @@ public class DetailColect {
         this.IDservicecollect = IDservicecollect;
     }
 
-    public float getPrice() {
+    public long getPrice() {
         return Price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(long price) {
         Price = price;
     }
 

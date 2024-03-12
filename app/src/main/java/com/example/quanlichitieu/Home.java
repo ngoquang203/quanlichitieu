@@ -12,6 +12,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.quanlichitieu.fragment.MainFragment;
 import com.example.quanlichitieu.fragment.ViewPageAdapter;
@@ -34,7 +37,6 @@ public class Home extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("loginData",MODE_PRIVATE);
         email = sharedPreferences.getString("email","");
         IDuser = sharedPreferences.getInt("IDuser",0);
-
         IDspent = sharedPreferences.getInt("IDspent",0);
         IDplan = sharedPreferences.getInt("IDplan",0);
 
@@ -47,12 +49,16 @@ public class Home extends AppCompatActivity {
         init();
         even_Click();
         even_bottomNavigator();
+
     }
 
     public void even_Click(){
         ViewPageAdapter viewPageAdapter = new ViewPageAdapter(this);
         viewPager.setAdapter(viewPageAdapter);
     }
+
+
+
     public void even_bottomNavigator(){
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override

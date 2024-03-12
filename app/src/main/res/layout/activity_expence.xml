@@ -42,7 +42,7 @@
             android:textSize="@dimen/title2"
             android:textStyle="bold"
             android:textColor="@color/light20"
-            android:text="Bao nhiêu?"
+            android:text="Bao nhiêu? (đơn vị : nghìn đồng)"
             android:layout_marginTop="50dp"
             />
 

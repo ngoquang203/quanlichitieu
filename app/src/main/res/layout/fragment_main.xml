@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.MainFragment">
+    tools:context=".fragment.MainFragment"
+    android:background="@color/light20">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -178,7 +179,7 @@
                 android:layout_marginTop="@dimen/regular2">
                 <Button
                     android:id="@+id/main_addIncomeButton"
-                    android:theme="@style/Base.Theme.ThemeGrow"
+                    android:theme="@style/Base.Theme.ThemeLight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Thêm thu"
@@ -189,7 +190,7 @@
                     android:textSize="@dimen/regular2"/>
                 <Button
                     android:id="@+id/main_addExpenceButton"
-                    android:theme="@style/Base.Theme.ThemeGrow"
+                    android:theme="@style/Base.Theme.ThemeLight"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/regular2"
@@ -200,34 +201,48 @@
                     android:textColor="@color/dark100"
                     android:textSize="@dimen/regular2"/>
                 <Button
-                    android:theme="@style/Base.Theme.ThemeGrow"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/regular2"
-                    android:text="Lịch sử"
-                    android:drawableTop="@drawable/transaction1"
-                    android:background="@drawable/background_border"
-                    android:textColor="@color/dark100"
-                    android:textSize="@dimen/regular2"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="20dp"
-                android:gravity="center">
-                <Button
-                    android:theme="@style/Base.Theme.ThemeGrow"
+                    android:id="@+id/main_buttonPlanMoney"
+                    android:theme="@style/Base.Theme.ThemeLight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/regular2"
-                    android:text="Thống kê"
-                    android:drawableTop="@drawable/pie_chart1"
+                    android:text="Tiếp kiệm"
+                    android:drawableTop="@drawable/wallet_3"
                     android:background="@drawable/background_border"
                     android:textColor="@color/dark100"
                     android:textSize="@dimen/regular2"/>
-
+<!--                <Button-->
+<!--                    android:id="@+id/main_buttonTransition"-->
+<!--                    android:theme="@style/Base.Theme.ThemeLight"-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:paddingHorizontal="@dimen/regular2"-->
+<!--                    android:text="Lịch sử"-->
+<!--                    android:drawableTop="@drawable/transaction1"-->
+<!--                    android:background="@drawable/background_border"-->
+<!--                    android:textColor="@color/dark100"-->
+<!--                    android:textSize="@dimen/regular2"/>-->
             </LinearLayout>
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:paddingTop="20dp"-->
+<!--                android:gravity="center">-->
+<!--                <Button-->
+<!--                    android:id="@+id/main_buttonBudget"-->
+<!--                    android:theme="@style/Base.Theme.ThemeLight"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:paddingHorizontal="@dimen/regular2"-->
+<!--                    android:text="Thống kê"-->
+<!--                    android:drawableTop="@drawable/pie_chart1"-->
+<!--                    android:background="@drawable/background_border"-->
+<!--                    android:textColor="@color/dark100"-->
+<!--                    android:textSize="@dimen/regular2"/>-->
+<!--                -->
+
+<!--            </LinearLayout>-->
 
         </LinearLayout>
 

@@ -34,9 +34,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <TextView
+            android:id="@+id/transiton_textViewErron"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Không có dữ liệu"
+            android:visibility="gone"/>
         <ListView
             android:id="@+id/transiton_viewpager2"
             android:layout_width="match_parent"
+            android:contentDescription="@string/listview_erron"
             android:layout_height="match_parent"/>
     </LinearLayout>
 

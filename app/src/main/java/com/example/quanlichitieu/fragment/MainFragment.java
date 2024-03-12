@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,9 +21,11 @@ import android.widget.Toast;
 
 import com.example.quanlichitieu.Expence;
 import com.example.quanlichitieu.Income;
+import com.example.quanlichitieu.PlanMoney;
 import com.example.quanlichitieu.R;
 import com.example.quanlichitieu.managementdata.CollectMoney;
 import com.example.quanlichitieu.managementdata.SpentMoney;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -34,8 +38,8 @@ public class MainFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private View view;
     private SharedPreferences sharedPreferences;
-    private float sumCollect,sumSpent;
-    private Button addIncomeButton,addExpneceButton;
+    private long sumCollect,sumSpent;
+    private Button addIncomeButton,addExpneceButton,buttonPlanMoney;
     private TextView textMonth,SumCollect,SumSpent,SumNow;
     private void Init(View view){
 
@@ -44,8 +48,8 @@ public class MainFragment extends Fragment {
         try {
             sumCollect = CollectMoney.getuserlist(IDuser).getSumCollect();
             sumSpent = SpentMoney.getuserlist(IDuser).getSumSpent();
-            sharedPreferences.edit().putFloat("SumCollect",sumCollect).apply();
-            sharedPreferences.edit().putFloat("SumSpent",sumSpent).apply();
+            sharedPreferences.edit().putLong("SumCollect",sumCollect).apply();
+            sharedPreferences.edit().putLong("SumSpent",sumSpent).apply();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -55,6 +59,7 @@ public class MainFragment extends Fragment {
         SumNow = view.findViewById(R.id.main_sumNow);
         addIncomeButton = view.findViewById(R.id.main_addIncomeButton);
         addExpneceButton = view.findViewById(R.id.main_addExpenceButton);
+        buttonPlanMoney = view.findViewById(R.id.main_buttonPlanMoney);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,6 +87,15 @@ public class MainFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        buttonPlanMoney.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PlanMoney.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     private void setData() {

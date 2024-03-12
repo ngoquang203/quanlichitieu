@@ -13,9 +13,9 @@ import java.util.Date;
 
 public class SpentMoney {
     private int IDuser,IDspent;
-    private float SumSpent;
+    private long SumSpent;
     public SpentMoney(){};
-    public SpentMoney(int IDuser, int IDspent, float sumSpent) {
+    public SpentMoney(int IDuser, int IDspent, long sumSpent) {
         this.IDuser = IDuser;
         this.IDspent = IDspent;
         SumSpent = sumSpent;
@@ -40,7 +40,7 @@ public class SpentMoney {
             spentMoney = new SpentMoney(
                     rs.getInt("IDuser"),
                     rs.getInt("IDspent"),
-                    rs.getFloat("SumSpent"));
+                    rs.getLong("SumSpent"));
         }
         // Đọc dữ liệu từ ResultSet
         connection.close();// Đóng kết nối
@@ -63,11 +63,11 @@ public class SpentMoney {
         this.IDspent = IDspent;
     }
 
-    public float getSumSpent() {
+    public long getSumSpent() {
         return SumSpent;
     }
 
-    public void setSumSpent(float sumSpent) {
+    public void setSumSpent(long sumSpent) {
         SumSpent = sumSpent;
     }
 }

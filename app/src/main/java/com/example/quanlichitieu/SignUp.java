@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -180,6 +182,7 @@ public class SignUp extends AppCompatActivity {
     private void getDialog() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.layout_dialog_notification);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         TextView title = dialog.findViewById(R.id.dialog_notification_Tilte);
         TextView messenge = dialog.findViewById(R.id.layout_notification_messenge);
         ImageButton button = dialog.findViewById(R.id.layout_notification_button);

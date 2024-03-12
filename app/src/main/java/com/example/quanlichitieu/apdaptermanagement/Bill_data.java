@@ -14,12 +14,12 @@ import java.util.Date;
 public class Bill_data {
     private int idDataCategory;
     private String IDservicecollect,Nameservice;
-    private float Price;
+    private long Price;
     private String Content;
     private Date Dates;
     private Time Times;
     public Bill_data(){};
-    public Bill_data(int idDataCategory, String IDservicecollect,String Nameservice, float price, String content, Date dates,Time times) {
+    public Bill_data(int idDataCategory, String IDservicecollect,String Nameservice, long price, String content, Date dates,Time times) {
         this.idDataCategory = idDataCategory;
         this.IDservicecollect = IDservicecollect;
         this.Nameservice = Nameservice;
@@ -49,7 +49,7 @@ public class Bill_data {
             billData.add(new Bill_data(rs.getInt("IDcollect"),
                     rs.getString("IDservicecollect"),
                     rs.getString("Nameservice"),
-                    rs.getFloat("Price"),
+                    rs.getLong("Price"),
                     rs.getString("Content"),
                     rs.getDate("Dates"),
                     rs.getTime("Times"))
@@ -63,7 +63,7 @@ public class Bill_data {
                     rs.getInt("IDspent"),
                     rs.getString("IDservicespent"),
                     rs.getString("Nameservice"),
-                    rs.getFloat("Price"),
+                    rs.getLong("Price"),
                     rs.getString("Content"),
                     rs.getDate("Dates"),
                     rs.getTime("Times")
@@ -110,11 +110,11 @@ public class Bill_data {
 
 
 
-    public float getPrice() {
+    public long getPrice() {
         return Price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(long price) {
         Price = price;
     }
 

@@ -8,6 +8,8 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,7 +48,7 @@ public class Expence extends AppCompatActivity {
     private String Money,Description,IDservice,dates,times,Nameservice;
     private SharedPreferences sharedPreferences;
     private int IDspent;
-    private float SumCollect,SumSpent,SumNow;
+    private long SumCollect,SumSpent,SumNow;
 
     private void Init(){
         spinner = findViewById(R.id.expence_spinner);
@@ -68,8 +70,8 @@ public class Expence extends AppCompatActivity {
         expence_button = findViewById(R.id.expence_button);
         sharedPreferences = getSharedPreferences("loginData",MODE_PRIVATE);
         IDspent = sharedPreferences.getInt("IDspent",0);
-        SumCollect = sharedPreferences.getFloat("SumCollect",0);
-        SumSpent = sharedPreferences.getFloat("SumSpent",0);
+        SumCollect = sharedPreferences.getLong("SumCollect",0);
+        SumSpent = sharedPreferences.getLong("SumSpent",0);
         SumNow = SumCollect - SumSpent;
     }
     @Override
@@ -170,6 +172,7 @@ public class Expence extends AppCompatActivity {
                 if(SumNow - Float.valueOf(Money) < 0){
                     Dialog dialog = new Dialog(Expence.this);
                     dialog.setContentView(R.layout.layout_dialog_notification);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     TextView title = dialog.findViewById(R.id.dialog_notification_Tilte);
                     TextView messenge = dialog.findViewById(R.id.layout_notification_messenge);
                     ImageButton button = dialog.findViewById(R.id.layout_notification_button);
