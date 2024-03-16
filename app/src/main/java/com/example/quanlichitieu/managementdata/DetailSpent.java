@@ -20,9 +20,10 @@ public class DetailSpent {
    private String Content;
    private Date Dates;
    private Time Times;
+   private long MoneyNow;
 
    public DetailSpent(){};
-    public DetailSpent(int IDdetailspent, int IDspent, String IDservicespent,String nameservice, long price, String content, Date dates,Time times) {
+    public DetailSpent(int IDdetailspent, int IDspent, String IDservicespent,String nameservice, long price, String content, Date dates,Time times,long moneynow) {
         this.IDdetailspent = IDdetailspent;
         this.IDspent = IDspent;
         this.IDservicespent = IDservicespent;
@@ -31,6 +32,7 @@ public class DetailSpent {
         Content = content;
         Dates = dates;
         Times = times;
+        MoneyNow = moneynow;
     }
 
     public static DetailSpent getuserlist(int IDspent) throws SQLException {
@@ -50,7 +52,8 @@ public class DetailSpent {
                     rs.getLong("Price"),
                     rs.getString("Content"),
                     rs.getDate("Dates"),
-                    rs.getTime("Times")
+                    rs.getTime("Times"),
+                    rs.getLong("MoneyNow")
             );
         }
         // Đọc dữ liệu từ ResultSet
@@ -58,18 +61,26 @@ public class DetailSpent {
         return detailSpent;
     }
 
-    public void Insert(int IDspent,String IDservicespent,String Nameservice,String Price,String Content,String Date,String Times) throws SQLException {
+    public void Insert(int IDspent,String IDservicespent,String Nameservice,String Price,String Content,String Date,String Times,String MoneyNow) throws SQLException {
         Connection connection = SQLmanagement.connectionSQLSever();
         // Thực thi câu lệnh SQL để kiểm tra ID
         Statement statement = connection.createStatement();
 
-        String sqlInserDetailSpent = "insert into DetailSpent(IDspent,IDservicespent,Nameservice,Price,Content,Dates,Times) values ("+
-                IDspent + ",'" + IDservicespent +"',N'" + Nameservice + "'," + Price + ",N'" + Content + "','" + Date+ "','" + Times + "')";
+        String sqlInserDetailSpent = "insert into DetailSpent(IDspent,IDservicespent,Nameservice,Price,Content,Dates,Times,MoneyNow) values ("+
+                IDspent + ",'" + IDservicespent +"',N'" + Nameservice + "'," + Price + ",N'" + Content + "','" + Date+ "','" + Times + "'," + MoneyNow + ")";
         Log.e("add Expence : ",sqlInserDetailSpent);
         statement.executeUpdate(sqlInserDetailSpent);
 
         // Đóng kết nối đến SQL Server
         connection.close();
+    }
+
+    public long getMoneyNow() {
+        return MoneyNow;
+    }
+
+    public void setMoneyNow(long moneyNow) {
+        MoneyNow = moneyNow;
     }
 
     public String getNameservice() {

@@ -5,9 +5,9 @@
         android:top="@dimen/regular2"
         android:bottom="@dimen/regular2"
         android:right="10dp"/>
-    <solid android:color="@color/blue80"/>
+    <solid android:color="@color/light100"/>
     <corners android:radius="@dimen/regular2" />
     <stroke android:width="2dp"
-        android:color="@color/violet100"/>
+        android:color="@color/light60"/>
 
 </shape>

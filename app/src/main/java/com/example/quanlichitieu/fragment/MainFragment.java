@@ -28,8 +28,11 @@ import com.example.quanlichitieu.managementdata.SpentMoney;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Locale;
 
 
 public class MainFragment extends Fragment {
@@ -99,11 +102,12 @@ public class MainFragment extends Fragment {
     }
 
     private void setData() {
+        DecimalFormat df = new DecimalFormat("###,###,###.## VND");
         LocalDate today = LocalDate.now();
         textMonth = view.findViewById(R.id.main_month);
         textMonth.setText("Tháng "+ today.getMonthValue());
-        SumCollect.setText(String.valueOf(sumCollect) + " VNĐ");
-        SumSpent.setText(String.valueOf(sumSpent) + " VNĐ");
-        SumNow.setText(String.valueOf(sumCollect - sumSpent) + " VNĐ");
+        SumCollect.setText(df.format(sumCollect));
+        SumSpent.setText(df.format(sumSpent));
+        SumNow.setText(df.format(sumCollect - sumSpent));
     }
 }

@@ -10,6 +10,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -29,22 +31,35 @@ import com.example.quanlichitieu.R;
 import com.example.quanlichitieu.apdaptermanagement.Adapter_table;
 import com.example.quanlichitieu.apdaptermanagement.Table_data;
 import com.example.quanlichitieu.databinding.LayoutDialogSortBinding;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.sql.Array;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class BudgetFragment extends Fragment {
     private View view;
-    private Button buttonIncome,buttonExpnece;
+    private TextView buttonIncome,buttonExpnece;
     private TextView selectedDate,sumMoneyText,textErron;
     private String dateStartInit,dateEndInit;
-    private ListView listView;
     private SharedPreferences sharedPreferences;
     private int IDcollect,IDspent;
 
@@ -52,6 +67,7 @@ public class BudgetFragment extends Fragment {
     private  Adapter_table adapterTable;
     private ArrayList<Table_data> tableData;
     private boolean clickButtonDialog;
+    private PieChart pieChart;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,23 +87,84 @@ public class BudgetFragment extends Fragment {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        adapterTable = new Adapter_table(getContext(),tableData);
-
-        listView.setAdapter(adapterTable);
+//        adapterTable = new Adapter_table(getContext(),tableData);
+//
+//        listView.setAdapter(adapterTable);
         setTextViewErron();
         SumMoney();
         clickButton();
         clickSelectedDate();
+        setInitDataPieChart();
+        getDataOfCollect();
         return view;
+    }
+    private void getDataOfCollect(){
+        List<PieEntry> entries = new ArrayList<>();
+        long[] dataCollect = new long[5];
+        String[] NameCollect = {"","Lương tháng","Tiền thưởng","Tiền lãi ngân hàng","Khác"};
+        Arrays.fill(dataCollect,0);
+        for(int i = 0;i<tableData.size();++i){
+            String str = tableData.get(i).getIDservice().toString();
+            dataCollect[Integer.valueOf(str.charAt(str.length() - 1)) -48] += tableData.get(i).getPrice();
+            Log.e("dataCollect[" + String.valueOf(Integer.valueOf(str.charAt(str.length() - 1))-48) + "]",String.valueOf(tableData.get(i).getPrice()) );
+        }
+        for(int i = 0;i < dataCollect.length;++i){
+            if(dataCollect[i] != 0){
+                entries.add(new PieEntry(dataCollect[i],NameCollect[i]));
+            }
+        }
+        PieDataSet pieDataSet = new PieDataSet(entries, "Pie Chart");
+        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        pieDataSet.setValueTextSize(24);
+
+
+        PieData pieData = new PieData(pieDataSet);
+
+        pieChart.setData(pieData);
+        pieChart.invalidate();
+
+    }
+    private void getDataOfSpent(){
+        List<PieEntry> entries = new ArrayList<>();
+        long[] dataSpent = new long[9];
+        String[] NameSpent = {"","Sinh hoạt","Giải trí","Học tập","Sức khỏe","Quần áo","Ăn uống","Đi lại","Khác"};
+        Arrays.fill(dataSpent,0);
+        for(int i = 0;i<tableData.size();++i){
+            String str = tableData.get(i).getIDservice().toString();
+            dataSpent[Integer.valueOf(str.charAt(str.length() - 1)) -48] += tableData.get(i).getPrice();
+            Log.e("dataCollect[" + String.valueOf(Integer.valueOf(str.charAt(str.length() - 1))-48) + "]",String.valueOf(tableData.get(i).getPrice()) );
+        }
+        for(int i = 0;i < dataSpent.length;++i){
+            if(dataSpent[i] != 0){
+                entries.add(new PieEntry(dataSpent[i],NameSpent[i]));
+            }
+        }
+        PieDataSet pieDataSet = new PieDataSet(entries, "Pie Chart");
+        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        pieDataSet.setValueTextSize(20);
+
+
+
+        PieData pieData = new PieData(pieDataSet);
+        pieChart.setData(pieData);
+        pieChart.invalidate();
+
+    }
+
+    private void setInitDataPieChart() {
+        List<PieEntry> entries = new ArrayList<>();
+
+
+
     }
 
     private void setTextViewErron(){
         if(tableData.isEmpty()){
             textErron.setVisibility(View.VISIBLE);
-            listView.setVisibility(View.GONE);
+            pieChart.setVisibility(View.GONE);
         }else{
             textErron.setVisibility(View.GONE);
-            listView.setVisibility(View.VISIBLE);
+            pieChart.setVisibility(View.VISIBLE);
         }
     }
 
@@ -103,9 +180,7 @@ public class BudgetFragment extends Fragment {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-                adapterTable = new Adapter_table(getContext(),tableData);
-
-                listView.setAdapter(adapterTable);
+                getDataOfCollect();
                 setTextViewErron();
                 clickButtonDialog = false;
             }
@@ -116,9 +191,7 @@ public class BudgetFragment extends Fragment {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-                adapterTable = new Adapter_table(getContext(),tableData);
-
-                listView.setAdapter(adapterTable);
+                getDataOfSpent();
                 setTextViewErron();
                 clickButtonDialog = false;
             }
@@ -146,15 +219,14 @@ public class BudgetFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 checkButton = true;
-                buttonIncome.setBackgroundColor(Color.BLUE);
+                buttonIncome.setBackgroundColor(getResources().getColor(R.color.blue80));
                 buttonExpnece.setBackgroundColor(Color.WHITE);
                 try {
                     tableData = Table_data.getuserListCollect(IDcollect,changDate(dateStartInit),changDate(dateEndInit));
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-                adapterTable = new Adapter_table(getContext(),tableData);
-                listView.setAdapter(adapterTable);
+                getDataOfCollect();
                 setTextViewErron();
 
             }
@@ -163,15 +235,14 @@ public class BudgetFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 checkButton = false;
-                buttonExpnece.setBackgroundColor(Color.BLUE);
+                buttonExpnece.setBackgroundColor(getResources().getColor(R.color.blue80));
                 buttonIncome.setBackgroundColor(Color.WHITE);
                 try {
                     tableData = Table_data.getuserListSpent(IDspent,changDate(dateStartInit),changDate(dateEndInit));
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-                adapterTable = new Adapter_table(getContext(),tableData);
-                listView.setAdapter(adapterTable);
+                getDataOfSpent();
                 setTextViewErron();
             }
         });
@@ -179,11 +250,12 @@ public class BudgetFragment extends Fragment {
 
     }
     private void SumMoney(){
+        DecimalFormat df = new DecimalFormat("###,###,###.## VND");
         long sum = 0;
         for(int i = 0;i<tableData.size();++i){
             sum+=tableData.get(i).getPrice();
         }
-        sumMoneyText.setText(String.valueOf(sum));
+        sumMoneyText.setText(df.format(sum));
     }
 
     private void setDateInit() {
@@ -304,11 +376,10 @@ public class BudgetFragment extends Fragment {
     }
 
     private void Init() {
-        buttonIncome = view.findViewById(R.id.budget_buttonIncome);
-        buttonExpnece = view.findViewById(R.id.budget_buttonExpence);
+        buttonIncome = view.findViewById(R.id.budget_textIncome);
+        buttonExpnece = view.findViewById(R.id.budget_textExpence);
         selectedDate = view.findViewById(R.id.budget_textSelectedDate);
-        buttonIncome.setBackgroundColor(Color.BLUE);
-        listView = view.findViewById(R.id.budget_listview);
+
         sharedPreferences = getActivity().getSharedPreferences("loginData",MODE_PRIVATE);
         IDcollect = sharedPreferences.getInt("IDcollect", 0);
         IDspent = sharedPreferences.getInt("IDspent",0);
@@ -318,6 +389,6 @@ public class BudgetFragment extends Fragment {
         clickButtonDialog = false;
 
         textErron = view.findViewById(R.id.budget_textViewErron);
-
+        pieChart = view.findViewById(R.id.budget_pieChart);
     }
 }

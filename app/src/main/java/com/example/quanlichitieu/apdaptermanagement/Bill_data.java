@@ -11,15 +11,16 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Bill_data {
+public class Bill_data implements Comparable<Bill_data>{
     private int idDataCategory;
     private String IDservicecollect,Nameservice;
     private long Price;
     private String Content;
     private Date Dates;
     private Time Times;
+    private long MoneyNow;
     public Bill_data(){};
-    public Bill_data(int idDataCategory, String IDservicecollect,String Nameservice, long price, String content, Date dates,Time times) {
+    public Bill_data(int idDataCategory, String IDservicecollect,String Nameservice, long price, String content, Date dates,Time times,long moneyNow) {
         this.idDataCategory = idDataCategory;
         this.IDservicecollect = IDservicecollect;
         this.Nameservice = Nameservice;
@@ -27,6 +28,7 @@ public class Bill_data {
         Content = content;
         Dates = dates;
         Times = times;
+        MoneyNow = moneyNow;
     }
 
 
@@ -34,11 +36,11 @@ public class Bill_data {
 
         Connection connection = SQLmanagement.connectionSQLSever();
         Statement statement = connection.createStatement();// Tạo đối tượng Statement.
-        String sqlcollect = "select IDcollect,DetailColect.IDservicecollect,DetailColect.Nameservice,Price,Content,Dates,Times\n" +
+        String sqlcollect = "select IDcollect,DetailColect.IDservicecollect,DetailColect.Nameservice,Price,Content,Dates,Times,MoneyNow\n" +
                 "from DetailColect inner join ServiceCollect on DetailColect.IDservicecollect = ServiceCollect.IDservicecollect\n" +
                 "where IDcollect = '" + IDcollect + "'";
         // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
-        String sqlspent = "select IDspent,DetailSpent.IDservicespent,DetailSpent.Nameservice,Price,Content,Dates,Times\n" +
+        String sqlspent = "select IDspent,DetailSpent.IDservicespent,DetailSpent.Nameservice,Price,Content,Dates,Times,MoneyNow\n" +
                 "from DetailSpent inner join ServiceSpent on DetailSpent.IDservicespent = ServiceSpent.IDservicespent\n" +
                 "where IDspent = '" + IDspent + "'";
 
@@ -52,7 +54,8 @@ public class Bill_data {
                     rs.getLong("Price"),
                     rs.getString("Content"),
                     rs.getDate("Dates"),
-                    rs.getTime("Times"))
+                    rs.getTime("Times"),
+                    rs.getLong("MoneyNow"))
 
             );
         }
@@ -66,7 +69,8 @@ public class Bill_data {
                     rs.getLong("Price"),
                     rs.getString("Content"),
                     rs.getDate("Dates"),
-                    rs.getTime("Times")
+                    rs.getTime("Times"),
+                    rs.getLong("MoneyNow")
             ));
         }
         // Đọc dữ liệu từ ResultSet
@@ -74,6 +78,13 @@ public class Bill_data {
         return billData;
     }
 
+    public long getMoneyNow() {
+        return MoneyNow;
+    }
+
+    public void setMoneyNow(long moneyNow) {
+        MoneyNow = moneyNow;
+    }
 
     public String getNameservice() {
         return Nameservice;
@@ -132,5 +143,10 @@ public class Bill_data {
 
     public void setDates(Date dates) {
         Dates = dates;
+    }
+
+    @Override
+    public int compareTo(Bill_data other) {
+        return this.Dates.compareTo(other.Dates);
     }
 }

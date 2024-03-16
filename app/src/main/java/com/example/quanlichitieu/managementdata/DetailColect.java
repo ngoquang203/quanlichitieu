@@ -21,10 +21,11 @@ public class DetailColect {
     private String Content;
     private Date Dates;
     private Time Times;
+    private long MoneyNow;
 
 
     public DetailColect(){};
-    public DetailColect(int IDDetailcolect, int IDcollect, String IDservicecollect,String nameservice, long price, String content, Date dates,Time times) {
+    public DetailColect(int IDDetailcolect, int IDcollect, String IDservicecollect,String nameservice, long price, String content, Date dates,Time times,long moneynow) {
         IDdetailcolect = IDDetailcolect;
         this.IDcollect = IDcollect;
         this.IDservicecollect = IDservicecollect;
@@ -33,6 +34,7 @@ public class DetailColect {
         Content = content;
         Dates = dates;
         Times = times;
+        MoneyNow = moneynow;
     }
 
     public static DetailColect getuserlist(int IDcollect) throws SQLException {
@@ -52,7 +54,8 @@ public class DetailColect {
                 rs.getLong("Price"),
                 rs.getString("Content"),
                     rs.getDate("Dates"),
-                    rs.getTime("Times")
+                    rs.getTime("Times"),
+                    rs.getLong("MoneyNow")
             );
         }
         // Đọc dữ liệu từ ResultSet
@@ -60,18 +63,26 @@ public class DetailColect {
         return detailColect;
     }
 
-    public void Insert(int IDcollect,String IDservicecollect,String Nameservice,String Price,String Content,String Date,String Times) throws SQLException {
+    public void Insert(int IDcollect,String IDservicecollect,String Nameservice,String Price,String Content,String Date,String Times,String MoneyNow) throws SQLException {
         Connection connection = SQLmanagement.connectionSQLSever();
         // Thực thi câu lệnh SQL để kiểm tra ID
         Statement statement = connection.createStatement();
 
-            String sqlInserDetailCollect = "insert into DetailColect(IDcollect,IDservicecollect,Nameservice,Price,Content,Dates,Times) values (" +
-                    IDcollect + ",'" + IDservicecollect + "',N'"+ Nameservice + "'," + Price + ",N'" + Content + "','" + Date + "','" + Times + "')\n";
+            String sqlInserDetailCollect = "insert into DetailColect(IDcollect,IDservicecollect,Nameservice,Price,Content,Dates,Times,MoneyNow) values (" +
+                    IDcollect + ",'" + IDservicecollect + "',N'"+ Nameservice + "'," + Price + ",N'" + Content + "','" + Date + "','" + Times + "'," + MoneyNow + ")\n";
             Log.e("add Income : ",sqlInserDetailCollect);
 
         statement.executeUpdate(sqlInserDetailCollect);
         // Đóng kết nối đến SQL Server
         connection.close();
+    }
+
+    public long getMoneyNow() {
+        return MoneyNow;
+    }
+
+    public void setMoneyNow(long moneyNow) {
+        MoneyNow = moneyNow;
     }
 
     public String getNameservice() {

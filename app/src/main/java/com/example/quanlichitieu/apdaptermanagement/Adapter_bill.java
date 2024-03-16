@@ -19,6 +19,8 @@ import androidx.annotation.Nullable;
 import com.example.quanlichitieu.R;
 import com.example.quanlichitieu.managementdata.ServiceSpent;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,27 +54,31 @@ public class Adapter_bill extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = layoutInflater.inflate(R.layout.item_bill,null);
         TextView title = convertView.findViewById(R.id.bill_title);
-        TextView supText = convertView.findViewById(R.id.bill_supText);
         TextView money = convertView.findViewById(R.id.bill_money);
         TextView time = convertView.findViewById(R.id.bill_time);
-        TextView date = convertView.findViewById(R.id.bill_date);
-
+        TextView date1 = convertView.findViewById(R.id.bill_date1);
+        DecimalFormat df = new DecimalFormat("###,###,###.## VND");
         Bill_data billData = arrayList.get(position);
         Log.e("Test",billData.getNameservice());
         if(billData != null){
             if(billData.getIdDataCategory()%2==0){
-                money.setText("-"+String.valueOf(billData.getPrice()));
+                money.setText("-"+df.format(billData.getPrice()));
                 money.setTextColor(Color.RED);
             }
             else{
-                money.setText("+"+String.valueOf(billData.getPrice()));
+
+                money.setText("+"+ df.format(billData.getPrice()));
                 money.setTextColor(Color.GREEN);
             }
             title.setText(billData.getNameservice());
-            supText.setText(billData.getContent());
+            SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("hh:mm");
+            time.setText(simpleTimeFormat.format(billData.getTimes()));
+            if(position!=0 && billData.getDates().equals(arrayList.get(position -1).getDates())){
+                date1.setVisibility(View.GONE);
+            }
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-            time.setText((billData.getTimes().toString()));
-            date.setText((billData.getDates().toString()));
+            date1.setText((simpleDateFormat.format(billData.getDates().getTime())));
         }
         return convertView;
     }

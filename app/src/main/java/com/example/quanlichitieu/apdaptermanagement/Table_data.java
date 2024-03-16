@@ -11,11 +11,13 @@ import java.util.Date;
 
 public class Table_data {
     private Date dates;
+    private String IDservice;
     private String Nameservice;
     private long Price;
 
-    public Table_data(Date dates, String nameservice, long price) {
+    public Table_data(Date dates,String idservice, String nameservice, long price) {
         this.dates = dates;
+        IDservice = idservice;
         Nameservice = nameservice;
         Price = price;
     }
@@ -23,7 +25,7 @@ public class Table_data {
 
         Connection connection = SQLmanagement.connectionSQLSever();
         Statement statement = connection.createStatement();// Tạo đối tượng Statement.
-        String sqlcollect = "select Dates,Nameservice,Price from DetailColect where IDcollect = " + IDcollect + " and Dates >= '" + dateStart +  "' and Dates <= '" + dateEnd + "'";
+        String sqlcollect = "select Dates,IDservicecollect,Nameservice,Price from DetailColect where IDcollect = " + IDcollect + " and Dates >= '" + dateStart +  "' and Dates <= '" + dateEnd + "'";
         // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
 
         ResultSet rs = statement.executeQuery(sqlcollect);
@@ -31,6 +33,7 @@ public class Table_data {
 
         while (rs.next()) {
             tableData.add(new Table_data(rs.getDate("Dates"),
+                    rs.getString("IDservicecollect"),
                     rs.getString("Nameservice"),
                     rs.getLong("Price"))
 
@@ -42,7 +45,7 @@ public class Table_data {
 
         Connection connection = SQLmanagement.connectionSQLSever();
         Statement statement = connection.createStatement();// Tạo đối tượng Statement.
-        String sqlcollect = "select Dates,Nameservice,Price from DetailSpent where IDspent = " + IDspent + " and Dates >= '" + dateStart +  "' and Dates <= '" + dateEnd + "'";
+        String sqlcollect = "select Dates,IDservicespent,Nameservice,Price from DetailSpent where IDspent = " + IDspent + " and Dates >= '" + dateStart +  "' and Dates <= '" + dateEnd + "'";
         // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
 
 
@@ -51,12 +54,21 @@ public class Table_data {
 
         while (rs.next()) {
             tableData.add(new Table_data(rs.getDate("Dates"),
+                    rs.getString("IDservicespent"),
                     rs.getString("Nameservice"),
                     rs.getLong("Price"))
 
             );
         }
         return tableData;
+    }
+
+    public String getIDservice() {
+        return IDservice;
+    }
+
+    public void setIDservice(String IDservice) {
+        this.IDservice = IDservice;
     }
 
     public Date getDates() {

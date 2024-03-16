@@ -192,7 +192,7 @@ public class Expence extends AppCompatActivity {
 
                         DetailSpent detailSpent = new DetailSpent();
                         try {
-                            detailSpent.Insert(IDspent,IDservice,Nameservice,Money,Description,formattedString, times);
+                            detailSpent.Insert(IDspent,IDservice,Nameservice,Money,Description,formattedString, times,String.valueOf( SumNow -  Long.valueOf(Money)));
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         }

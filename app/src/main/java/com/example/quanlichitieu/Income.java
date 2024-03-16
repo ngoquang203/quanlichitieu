@@ -48,6 +48,7 @@ public class Income extends AppCompatActivity {
     private String Money,Description,IDservice,dates,times,Nameservice;
     private SharedPreferences sharedPreferences;
     private int IDcollect;
+    private long SumCollect,SumSpent,SumNow;
 
     private void Init(){
         spinner = findViewById(R.id.income_spinner);
@@ -72,6 +73,9 @@ public class Income extends AppCompatActivity {
         income_button = findViewById(R.id.income_button);
         sharedPreferences = getSharedPreferences("loginData",MODE_PRIVATE);
         IDcollect = sharedPreferences.getInt("IDcollect",0);
+        SumCollect = sharedPreferences.getLong("SumCollect",0);
+        SumSpent = sharedPreferences.getLong("SumSpent",0);
+        SumNow = SumCollect - SumSpent;
     }
 
     @Override
@@ -175,7 +179,7 @@ public class Income extends AppCompatActivity {
                 if(Money.length() != 0 && Description.length() != 0){
                     DetailColect detailColect = new DetailColect();
                     try {
-                        detailColect.Insert(IDcollect,IDservice,Nameservice,Money,Description,formattedString,times);
+                        detailColect.Insert(IDcollect,IDservice,Nameservice,Money,Description,formattedString,times,String.valueOf(SumNow + Long.valueOf(Money)));
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
