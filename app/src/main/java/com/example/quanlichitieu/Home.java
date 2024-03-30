@@ -2,44 +2,90 @@ package com.example.quanlichitieu;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 
-import com.example.quanlichitieu.fragment.MainFragment;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.Bundle;
+
+import android.view.MenuItem;
+
+
 import com.example.quanlichitieu.fragment.ViewPageAdapter;
-import com.example.quanlichitieu.managementdata.CollectMoney;
-import com.example.quanlichitieu.managementdata.Users;
+
+import com.example.quanlichitieu.managementdata.PlanMonney;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Home extends AppCompatActivity {
 
+    private static final int NOTIFICATION_ID = 1;
+    private static final String CHANNEL_ID = "my_channel";
     private ViewPager2 viewPager;
     private BottomNavigationView bottomNavigationView;
     private String email;
-    private int IDuser,IDcollect,IDplan,IDspent;
+    private int IDuser, IDcollect, IDplan, IDspent;
     private SharedPreferences sharedPreferences;
-    private void init(){
+    private ArrayList<PlanMonney> arrayList;
+    private boolean index = false;
+
+    private void init() {
         viewPager = findViewById(R.id.view_page);
         bottomNavigationView = findViewById(R.id.bottom_navigator);
-        sharedPreferences = getSharedPreferences("loginData",MODE_PRIVATE);
-        email = sharedPreferences.getString("email","");
-        IDuser = sharedPreferences.getInt("IDuser",0);
-        IDspent = sharedPreferences.getInt("IDspent",0);
-        IDplan = sharedPreferences.getInt("IDplan",0);
+        sharedPreferences = getSharedPreferences("loginData", MODE_PRIVATE);
+        email = sharedPreferences.getString("email", "");
+        IDuser = sharedPreferences.getInt("IDuser", 0);
+        IDspent = sharedPreferences.getInt("IDspent", 0);
+        IDplan = sharedPreferences.getInt("IDplan", 0);
+        try {
+            arrayList = PlanMonney.getuserlist(IDuser);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        setNotification();
+    }
 
+    private void setNotification() {
+        for (int i = 0; i < arrayList.size(); ++i) {
+            if (arrayList.get(i).getMoneyNow() >= arrayList.get(i).getSummoney()) {
+                if(index == false){
+                    index = true;
+                }
+                break;
+            }
+        }
+        if (index == true) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                CharSequence name = "Thông báo"; // Tên kênh thông báo
+                String description = "Một kế hoạch của bạn đã hoàn thành"; // Mô tả kênh
+                int importance = NotificationManager.IMPORTANCE_DEFAULT; // Mức độ quan trọng của thông báo
+                NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+                channel.setDescription(description);
+                // Đăng ký kênh với hệ thống
+
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                        .setSmallIcon(R.drawable.notification) // Icon của thông báo
+                        .setContentTitle(name) // Tiêu đề thông báo
+                        .setContentText(description) // Nội dung thông báo
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT); // Đặt ưu tiên cho thông báo
+                NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                notificationManager.createNotificationChannel(channel);
+                notificationManager.notify(NOTIFICATION_ID,builder.build());
+            }
+        }
     }
 
     @Override

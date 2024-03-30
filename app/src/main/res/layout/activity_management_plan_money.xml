@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ManagementPlanMoney"
+    android:background="@color/light60"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/regular2"
+        android:background="@color/light100">
+        <ImageButton
+            android:id="@+id/managementPlanMoney_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/arrowleft"
+            android:background="@color/light100"
+            android:contentDescription="@string/app_avatar"/>
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quản lí tiếp kiệm"
+            android:textSize="@dimen/title2"
+            android:fontFamily="@font/robuto_font"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/regular2"/>
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/managementPlanMoney_textview"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Không có dữ liệu"
+        android:visibility="gone"/>
+    <ListView
+        android:id="@+id/managementPlanMoney_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/regular2"
+        android:paddingHorizontal="@dimen/regular2"
+        android:dividerHeight="@dimen/regular2"
+        android:contentDescription="@string/listview_erron"
+        android:divider="@android:color/transparent"
+        android:visibility="visible"/>
+</LinearLayout>

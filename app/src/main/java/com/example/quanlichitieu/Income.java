@@ -7,6 +7,8 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +26,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -39,7 +42,7 @@ public class Income extends AppCompatActivity {
     private List<ServiceCollect> serviceappList;
     private Spinner spinner;
     private CategoryAdapterIncome categoryAdapter;
-    private TextView dateTextInputEditText,timeTextInputEditText;
+    private TextView dateTextInputEditText,timeTextInputEditText,supMoney;
     private TextInputEditText income_money;
 
     private TextInputEditText income_description;
@@ -49,6 +52,7 @@ public class Income extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private int IDcollect;
     private long SumCollect,SumSpent,SumNow;
+    private DecimalFormat df = new DecimalFormat("###,###,###.## VND");
 
     private void Init(){
         spinner = findViewById(R.id.income_spinner);
@@ -65,12 +69,12 @@ public class Income extends AppCompatActivity {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
+        IDservice = list.get(spinner.getSelectedItemPosition()).getNameservice();
         income_back = findViewById(R.id.income_back);
-
         income_money = findViewById(R.id.income_money);
         income_description = findViewById(R.id.income_description);
         income_button = findViewById(R.id.income_button);
+        supMoney = findViewById(R.id.income_supMoney);
         sharedPreferences = getSharedPreferences("loginData",MODE_PRIVATE);
         IDcollect = sharedPreferences.getInt("IDcollect",0);
         SumCollect = sharedPreferences.getLong("SumCollect",0);
@@ -92,7 +96,32 @@ public class Income extends AppCompatActivity {
         clickEditText();
         clickBackHome();
         clickSaveDateIncome();
+        updateSupMoney();
+    }
 
+    private void updateSupMoney() {
+
+        income_money.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().length() > 0){
+                    supMoney.setText(df.format(Long.valueOf(s.toString())));
+                }
+                else{
+                    supMoney.setText("0 VND");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void clickEditText(){
@@ -173,7 +202,6 @@ public class Income extends AppCompatActivity {
                                     } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
-
                 // Định dạng Date sang chuỗi mới
                 String formattedString = sdf2.format(date);
                 if(Money.length() != 0 && Description.length() != 0){

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EnterOTP"
+    android:orientation="vertical"
+    android:background="@color/light60">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/light100"
+        >
+        <ImageButton
+            android:id="@+id/sendOTP_back"
+            android:background="@color/light100"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/arrowleft"
+            android:contentDescription="@string/app_avatar"/>
+        <TextView
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Nhập OTP"
+            android:textSize="@dimen/title2"
+            android:fontFamily="@font/robuto_font"
+            android:textStyle="bold"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/regular2"
+        android:layout_marginTop="100dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/background_border">
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Nhập OTP đã gửi đến số điện thoại"
+                android:fontFamily="@font/robuto_font"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                app:errorEnabled="true"
+                android:layout_marginTop="15dp"
+
+                app:helperTextTextColor="@color/red100">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/enterOTP_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_input"
+                    android:ems="10"
+                    android:hint="OTP"
+                    android:inputType="text"
+                    android:textColorHint="@color/dark50"
+                    android:textSize="@dimen/title3" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/enterOTP_sendAgain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue80"
+                android:text="Gửi lại"/>
+            <TextView
+                android:id="@+id/enterOTP_button"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Xác nhận OTP"
+                android:textSize="@dimen/title3"
+                android:textColor="@color/light100"
+                android:fontFamily="@font/robuto_font"
+                android:background="@drawable/background_border"
+                android:backgroundTint="@color/blue80"
+                android:layout_marginTop="@dimen/regular2"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+
+
+

@@ -33,7 +33,7 @@ public class SignUps {
         if (count == 0) {
             // Tạo câu lệnh SQL để thêm đối tượng vào bảng
             String sqlInsert = "INSERT INTO Logins (ID, Passwords) VALUES ('" + Email + "','" + Password +"')";
-            String sqlInsertUsers = "insert into Users(Names,ID) values ('" + Name+ "','" + Email + "')";
+            String sqlInsertUsers = "insert into Users(Names,NumberPhone,ID) values (N'" + Name+ "','" + Email + "','" + Email + "')";
             // Thực thi câu lệnh SQL để thêm đối tượng
             statement.executeUpdate(sqlInsert);
             statement.executeUpdate(sqlInsertUsers);

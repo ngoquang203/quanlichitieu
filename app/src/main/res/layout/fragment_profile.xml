@@ -3,14 +3,196 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.ProfileFragment">
+    tools:context=".fragment.ProfileFragment"
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
-    <Button
-        android:id="@+id/profile_loginOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Log out"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/title2"
+            android:background="@color/blue80">
+            <ImageButton
+                android:id="@+id/profile_avatar"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/user"
+                android:background="@drawable/background_ciclek"
+                android:backgroundTint="@color/light60"
+                android:contentDescription="@string/app_avatar"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/title2">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tên tài khoản"
+                    android:textSize="@dimen/regular2"
+                    android:textColor="@color/light60"
+                    android:fontFamily="@font/robuto_font"/>
+
+                <TextView
+                    android:id="@+id/profile_userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robuto_font"
+                    android:text="Ngo Quang"
+                    android:textColor="@color/light100"
+                    android:textSize="@dimen/title2"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/regular2">
+            <TextView
+                android:id="@+id/profile_changeInformation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Chỉnh sửa thông tin"
+                android:textColor="@color/blue80"
+                android:textSize="@dimen/regular2"
+                android:gravity="end"/>
+            <TextView
+                android:layout_marginTop="@dimen/regular2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Thông tin cá nhân"
+                android:textColor="@color/dark100"
+                android:textStyle="bold"
+                android:textSize="@dimen/title3"
+                android:gravity="start"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="7dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/robuto_font"
+                    android:text="Tên tài khoản : "
+                    android:textColor="@color/dark50"
+                    android:textSize="@dimen/regular2" />
+                <TextView
+                    android:id="@+id/profile_nameInfo"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Ngo Quang"
+                    android:textSize="@dimen/regular2"
+                    android:textColor="@color/dark100"
+                    android:fontFamily="@font/robuto_font"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="7dp">
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giới tính : "
+                android:textSize="@dimen/regular2"
+                android:textColor="@color/dark50"
+                android:fontFamily="@font/robuto_font"/>
+            <TextView
+                android:id="@+id/profile_sexInfo"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="Nam"
+                android:textSize="@dimen/regular2"
+                android:textColor="@color/dark100"
+                android:fontFamily="@font/robuto_font"
+                android:textStyle="bold"/>
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="7dp">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số điện thoại : "
+                    android:textSize="@dimen/regular2"
+                    android:textColor="@color/dark50"
+                    android:fontFamily="@font/robuto_font"/>
+                <TextView
+                    android:id="@+id/profile_phoneNumberInfo"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="0969950346"
+                    android:textSize="@dimen/regular2"
+                    android:textColor="@color/dark100"
+                    android:fontFamily="@font/robuto_font"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="7dp">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email : "
+                    android:textSize="@dimen/regular2"
+                    android:textColor="@color/dark50"
+                    android:fontFamily="@font/robuto_font"/>
+                <TextView
+                    android:id="@+id/profile_emailInfo"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="ngoqaung3782@gmail.com"
+                    android:textSize="@dimen/regular2"
+                    android:textColor="@color/dark100"
+                    android:fontFamily="@font/robuto_font"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+
+                <TextView
+                android:id="@+id/profile_loginOut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_input"
+                android:backgroundTint="@color/blue80"
+                android:text="Log out"
+                android:textColor="@color/light100"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/title2"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
 
 
 </FrameLayout>

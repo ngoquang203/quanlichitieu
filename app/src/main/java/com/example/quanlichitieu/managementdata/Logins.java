@@ -16,6 +16,7 @@ public class Logins {
     private String ID;
     private String Passwords;
 
+    public Logins(){};
     public Logins(String ID, String passwords) {
         this.ID = ID;
         this.Passwords = passwords;
@@ -36,6 +37,26 @@ public class Logins {
         connection.close();// Đóng kết nối
         return list;
     }
+    public static void changePassword(String phone,String passwords) throws SQLException {
+        Connection connection = SQLmanagement.connectionSQLSever();
+        Statement statement = connection.createStatement();
+        String sql = "UPDATE Logins SET Passwords = '" + passwords + "' WHERE ID = '" + phone + "'";
+        statement.executeUpdate(sql);
+        connection.close();
+    }
+    public static Logins getLogins(String phone) throws SQLException{
+        Connection connection = SQLmanagement.connectionSQLSever();
+        Statement statement = connection.createStatement();
+        String sql = "select * from Logins where ID = '" + phone + "'";
+        Logins logins = new Logins();
+        ResultSet rs = statement.executeQuery(sql);
+        while (rs.next()){
+            logins = new Logins(rs.getString("ID"),rs.getString("Passwords"));
+        }
+        connection.close();
+        return logins;
+    }
+
 
 
     public String getID() {

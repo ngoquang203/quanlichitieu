@@ -11,6 +11,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -29,6 +31,7 @@ import com.example.quanlichitieu.managementdata.ServiceSpent;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -39,7 +42,7 @@ public class Expence extends AppCompatActivity {
     private List<ServiceSpent> serviceappList;
     private Spinner spinner;
     private CategoryAdapter categoryAdapter;
-    private TextView dateTextInputEditText,timeTextInputEditText;
+    private TextView dateTextInputEditText,timeTextInputEditText,supMoney;
     private TextInputEditText expence_money;
 
     private TextInputEditText expence_description;
@@ -49,6 +52,7 @@ public class Expence extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private int IDspent;
     private long SumCollect,SumSpent,SumNow;
+    private DecimalFormat df = new DecimalFormat("###,###,###.## VND");
 
     private void Init(){
         spinner = findViewById(R.id.expence_spinner);
@@ -68,6 +72,7 @@ public class Expence extends AppCompatActivity {
         expence_money = findViewById(R.id.expence_money);
         expence_description = findViewById(R.id.expence_description);
         expence_button = findViewById(R.id.expence_button);
+        supMoney = findViewById(R.id.expence_supMoney);
         sharedPreferences = getSharedPreferences("loginData",MODE_PRIVATE);
         IDspent = sharedPreferences.getInt("IDspent",0);
         SumCollect = sharedPreferences.getLong("SumCollect",0);
@@ -88,8 +93,33 @@ public class Expence extends AppCompatActivity {
         clickEditText();
         clickSaveDateExpence();
         clickBackHome();
-
+        updateSupMoney();
     }
+
+    private void updateSupMoney() {
+        expence_money.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().length() > 0){
+                    supMoney.setText(df.format(Long.valueOf(s.toString())));
+                }
+                else{
+                    supMoney.setText("0 VND");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
     private void clickEditText(){
         Calendar calendar = Calendar.getInstance();
 

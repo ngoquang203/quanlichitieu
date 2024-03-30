@@ -48,7 +48,7 @@ public class TransactionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_transaction, container, false);
-        Button buttonIncome = view.findViewById(R.id.transition_buttonImages);
+//        Button buttonIncome = view.findViewById(R.id.transition_buttonImages);
         viewPager2 = view.findViewById(R.id.transiton_viewpager2);
         viewPager2.setDivider(null);
         TextView textView = view.findViewById(R.id.transiton_textViewErron);
@@ -59,13 +59,13 @@ public class TransactionFragment extends Fragment {
         IDcollect = sharedPreferences.getInt("IDcollect",0);
         IDspent = sharedPreferences.getInt("IDspent",0);
         // Assuming the actual ID is button_income
-        buttonIncome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                clickButtonSort();
-            }
-        });
+//        buttonIncome.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                clickButtonSort();
+//            }
+//        });
         // Inflate the layout for this fragment
 
         ArrayList<Bill_data> listData = new ArrayList<>();

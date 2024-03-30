@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignUp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/light60">
         <LinearLayout
             android:layout_marginTop="@dimen/title2"
             android:layout_width="match_parent"
@@ -76,8 +77,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_input"
                 android:ems="10"
-                android:hint="ID"
-                android:inputType="text"
+                android:hint="Số điện thoại"
+                android:inputType="number"
                 android:textColorHint="@color/dark50"
                 android:textSize="@dimen/title3" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -130,9 +131,10 @@
             android:layout_height="wrap_content"
             android:text="Bằng cách đăng ký, bạn đồng ý với Điều khoản dịch vụ và Chính sách quyền riêng tư"
             android:textSize="@dimen/regular2"
+            android:fontFamily="@font/robuto_font"
             android:layout_marginTop="20dp"/>
         <Button
-            android:theme="@style/Base.Theme.ThemeViolet"
+            android:theme="@style/Base.Theme.ThemeBlue"
             android:id="@+id/signup_buttonAddUser"
             android:layout_width="match_parent"
             android:layout_height="56dp"

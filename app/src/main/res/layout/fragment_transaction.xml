@@ -22,14 +22,14 @@
             android:text="Lịch sử"
             android:textStyle="bold"
             android:gravity="center"/>
-        <Button
-            android:id="@+id/transition_buttonImages"
-            android:theme="@style/Base.Theme.ThemeLight"
-            android:paddingHorizontal="10dp"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:drawableEnd="@drawable/sort"
-            android:contentDescription="@string/app_avatar" />
+<!--        <Button-->
+<!--            android:id="@+id/transition_buttonImages"-->
+<!--            android:theme="@style/Base.Theme.ThemeLight"-->
+<!--            android:paddingHorizontal="10dp"-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:drawableEnd="@drawable/sort"-->
+<!--            android:contentDescription="@string/app_avatar" />-->
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

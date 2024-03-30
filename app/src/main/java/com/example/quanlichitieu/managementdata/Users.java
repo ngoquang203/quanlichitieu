@@ -29,11 +29,10 @@ public class Users {
         Email = email;
     }
 
-    public static Users getuserlist(String email) throws SQLException {
-
+    public static Users getuserlist(String phone) throws SQLException {
         Connection connection = SQLmanagement.connectionSQLSever();
         Statement statement = connection.createStatement();// Tạo đối tượng Statement.
-        String sql = "select * from Users where ID = '" + email +"'";
+        String sql = "select * from Users where ID = '" + phone +"'";
         // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
         ResultSet rs = statement.executeQuery(sql);
         Users users = new Users();
@@ -48,6 +47,13 @@ public class Users {
                 // Đọc dữ liệu từ ResultSet
         connection.close();// Đóng kết nối
         return users;
+    }
+    public static void UpdateInfoUsers(String Name,String Sex,String Email,String phone) throws Exception{
+        Connection connection = SQLmanagement.connectionSQLSever();
+        Statement statement = connection.createStatement();
+        String sql = "update Users set Names = N'" + Name + "',Sex = N'" + Sex + "',Email = '" + Email + "' where ID = '" + phone + "'\n";
+        statement.executeUpdate(sql);
+        connection.close();
     }
 
     public int getIDusers() {

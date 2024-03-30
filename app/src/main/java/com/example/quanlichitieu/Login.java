@@ -1,5 +1,8 @@
 package com.example.quanlichitieu;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,7 +19,11 @@ import com.example.quanlichitieu.managementdata.Logins;
 import com.example.quanlichitieu.managementdata.PlanMonney;
 import com.example.quanlichitieu.managementdata.SpentMoney;
 import com.example.quanlichitieu.managementdata.Users;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -33,6 +40,7 @@ public class Login extends AppCompatActivity {
         clickForgot = findViewById(R.id.loginForgot);
         clickSignUp = findViewById(R.id.loginSignUp);
         sharedPreferences = getSharedPreferences("loginData",MODE_PRIVATE);
+
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +49,20 @@ public class Login extends AppCompatActivity {
         Init();
         clickLoginListen();
         clickSignUp();
+        clickForgotButton();
     }
+
+    private void clickForgotButton() {
+        clickForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login.this,ForgotPassword.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
     public void setTextEmail(){
         email = emailText.getText().toString();
     }
@@ -76,14 +97,11 @@ public class Login extends AppCompatActivity {
                         SumCollect = collectMoney.getSumCollect();
                         IDspent = spentMoney.getIDspent();
                         SumSpent = spentMoney.getSumSpent();
-                        IDplan = PlanMonney.getuserlist(IDuser).getIDplan();
-
                         sharedPreferences.edit().putBoolean("login",true).apply();
                         sharedPreferences.edit().putString("email",email).apply();
                         sharedPreferences.edit().putInt("IDuser",IDuser).apply();
                         sharedPreferences.edit().putInt("IDcollect",IDcollect).apply();
                         sharedPreferences.edit().putInt("IDspent",IDspent).apply();
-                        sharedPreferences.edit().putInt("IDplan",IDplan).apply();
                         sharedPreferences.edit().putLong("SumCollect",SumCollect).apply();
                         sharedPreferences.edit().putLong("SumSpent",SumSpent).apply();
 

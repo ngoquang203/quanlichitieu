@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/background_input"
             android:ems="10"
-            android:hint="ID"
+            android:hint="Số điện thoại"
             android:inputType="text"
             android:textColorHint="@color/dark50"
             android:textSize="@dimen/title3" />
@@ -70,7 +70,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:theme="@style/Base.Theme.ThemeViolet"
+        android:theme="@style/Base.Theme.ThemeBlue"
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -93,7 +93,7 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/background_nobutton"
         android:text="Quên mật khẩu?"
-        android:textColor="@color/violet100"
+        android:textColor="@color/blue80"
         android:textSize="@dimen/title2"
         android:textStyle="bold"
         android:theme="@style/Base.Theme.ThemeLight"
@@ -122,7 +122,7 @@
         android:layout_marginEnd="24dp"
         android:background="@color/light100"
         android:text="Đăng kí"
-        android:textColor="@color/violet100"
+        android:textColor="@color/blue80"
         android:textSize="@dimen/title3"
         android:theme="@style/Base.Theme.ThemeLight"
         app:layout_constraintEnd_toEndOf="parent"

@@ -115,11 +115,8 @@ public class BudgetFragment extends Fragment {
         }
         PieDataSet pieDataSet = new PieDataSet(entries, "Pie Chart");
         pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        pieDataSet.setValueTextSize(24);
-
-
+        pieDataSet.setValueTextSize(20);
         PieData pieData = new PieData(pieDataSet);
-
         pieChart.setData(pieData);
         pieChart.invalidate();
 

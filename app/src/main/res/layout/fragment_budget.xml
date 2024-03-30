@@ -32,7 +32,7 @@
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thu tiền"
+            android:text="Chi tiền"
             android:paddingVertical="@dimen/regular3"
             android:textSize="@dimen/title2"
             android:textColor="@color/dark100"/>

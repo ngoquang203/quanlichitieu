@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/light100">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="5dp"
+        android:background="@color/blue80">
+        <ImageButton
+            android:id="@+id/dialog_changeInfo_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/arrowleft"
+            android:background="@color/blue80"
+            android:contentDescription="@string/app_name"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="Thay đổi thông tin cá nhân"
+            android:textSize="@dimen/title2"
+            android:textColor="@color/dark100"
+            android:textStyle="bold"
+            android:fontFamily="@font/robuto_font"
+            android:paddingLeft="@dimen/regular2"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/regular1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/regular2">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/regular2"
+                android:text="Tên tài khoản"
+                android:fontFamily="@font/robuto_font"
+                android:textSize="@dimen/regular2"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialog_changeInfo_userName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_input"
+                    android:ems="10"
+                    android:hint="Nhập tên"
+                    android:inputType="text"
+                    android:textSize="@dimen/title3"
+                    android:layout_marginTop="10dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/regular2"
+                android:text="Giới tính"
+                android:fontFamily="@font/robuto_font"
+                android:textSize="@dimen/regular2"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <CheckBox
+                    android:id="@+id/dialog_changeInfo_checkBoxMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nam"
+                    android:textSize="@dimen/regular2"
+                    android:fontFamily="@font/robuto_font"/>
+                <CheckBox
+                    android:id="@+id/dialog_changeInfo_checkBoxFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nữ"
+                    android:textSize="@dimen/regular2"
+                    android:fontFamily="@font/robuto_font"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/regular2">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/regular2"
+                android:text="Email"
+                android:fontFamily="@font/robuto_font"
+                android:textSize="@dimen/regular2"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialog_changeInfo_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_input"
+                    android:ems="10"
+                    android:hint="Nhập email"
+                    android:inputType="text"
+                    android:textSize="@dimen/title3"
+                    android:layout_marginTop="10dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/dialog_changeInfo_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/title2"
+            android:gravity="center"
+            android:background="@drawable/background_input"
+            android:backgroundTint="@color/blue80"
+            android:text="Xác nhận"
+            android:textColor="@color/light100"
+            android:fontFamily="@font/robuto_font"
+            android:textSize="@dimen/regular2"/>
+    </LinearLayout>
+</LinearLayout>

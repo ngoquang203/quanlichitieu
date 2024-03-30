@@ -2,7 +2,9 @@ package com.example.quanlichitieu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quanlichitieu.managementdata.CollectMoney;
+import com.example.quanlichitieu.managementdata.Logins;
 import com.example.quanlichitieu.managementdata.PlanMonney;
 import com.example.quanlichitieu.managementdata.SignUps;
 import com.example.quanlichitieu.managementdata.SpentMoney;
@@ -169,34 +172,33 @@ public class SignUp extends AppCompatActivity {
                 if(Name.length() >= 6 && Email.length() >= 8 && Password.length() >= 6 && check == true && Password.equals(PasswordConfirm)){
                     SignUps signUps = new SignUps(Name,Email,Password);
                     try {
-                        signUps.Insert();
+                        Logins logins = Logins.getLogins(Email);
+                        if(logins.getID().equals(Email)){
+                            Toast.makeText(SignUp.this, "Đã có tài khoản đăng kí với số điện thoại này", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            getDialog();
+                            signUps.Insert();
+                        }
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
-                    getDialog();
                 }
             }
         });
     }
 
     private void getDialog() {
-        Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.layout_dialog_notification);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        TextView title = dialog.findViewById(R.id.dialog_notification_Tilte);
-        TextView messenge = dialog.findViewById(R.id.layout_notification_messenge);
-        ImageButton button = dialog.findViewById(R.id.layout_notification_button);
-        title.setText("Thông báo");
-        messenge.setText("Đăng kí tài khoản thành công");
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
+        AlertDialog.Builder builder = new AlertDialog.Builder(SignUp.this);
+        builder.setMessage("Bạn đã đăng kí tài khoản thành công");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(SignUp.this,Login.class);
                 startActivity(intent);
             }
         });
-        dialog.show();
+        AlertDialog alert = builder.create();
+        alert.show();
 
     }
 }
